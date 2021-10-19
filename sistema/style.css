@@ -1,0 +1,14 @@
+body{
+ background-color: #34B4A3;
+}
+
+.header{
+    color: palegreen;
+}
+
+header h1{
+    font-family: Arial, Helvetica,serif;
+    font: bold;
+    font-style: italic;
+    font-size: large;
+}
