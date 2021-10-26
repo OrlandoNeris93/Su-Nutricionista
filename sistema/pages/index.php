@@ -53,29 +53,10 @@
                         <a href="../salir.php"><i class="fa fa-sign-out fa-fw"></i> Salir</a>
                     </li>
                 </ul>
-                <!-- /.navbar-top-links -->
 
-                <div class="navbar-default sidebar" role="navigation">
-                    <div class="sidebar-nav navbar-collapse">
-                        <ul class="nav" id="side-menu">                            
-                            <li>
-                                <a href="index.html" class="active"><i class="fa fa-home fa-fw"></i> Principal</a>
-                            </li>                            
-                            <li>
-                                <a href="perfil.html"><i class="fa fa-user fa-fw"></i> Perfil</a>
-                            </li>
-                            <li>
-                                <a href="pacientes.html"><i class="fa fa-users fa-fw"></i> Pacientes</a>
-                            </li>
-                            <li>
-                                <a href="#"><i class="fa fa-table fa-fw"></i> Recetas</a>
-                            </li>
-                            <li>
-                                <a href="#"><i class="fa fa-edit fa-fw"></i> Informes</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
+                <!-- /.navbar-top-links -->                
+              <?php  require_once "navbar.php";  // se incluye archivo del navbar ?>
+               
             </nav>
 
             <div id="page-wrapper">
@@ -100,7 +81,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <a href="#">
+                                <a href="add_consulta.php">
                                     <div class="panel-footer">                                       
                                         <span class="pull-right"><i class="fa fa-plus-circle fa-3x"></i></span>
 
@@ -121,7 +102,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <a href="add_paciente.html">
+                                <a href="add_paciente.php">
                                     <div class="panel-footer">
                                         <span class="pull-right"><i class="fa fa-plus-circle fa-3x"></i></span>
                                         <div class="clearfix"></div>

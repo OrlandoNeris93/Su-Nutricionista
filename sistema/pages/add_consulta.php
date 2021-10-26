@@ -54,28 +54,11 @@
                     </li>
                 </ul>
                 <!-- /.navbar-top-links -->
+                
+                <!-- /.navbar-top-links -->                
+                <?php  require_once "navbar.php";  // se incluye archivo del navbar ?>
 
-                <div class="navbar-default sidebar" role="navigation">
-                    <div class="sidebar-nav navbar-collapse">
-                        <ul class="nav" id="side-menu">                            
-                            <li>
-                                <a href="index.html" class="active"><i class="fa fa-home fa-fw"></i> Principal</a>
-                            </li>                            
-                            <li>
-                                <a href="forms.html"><i class="fa fa-user fa-fw"></i> Perfil</a>
-                            </li>
-                            <li>
-                                <a href="pacientes.html"><i class="fa fa-users fa-fw"></i> Pacientes</a>
-                            </li>
-                            <li>
-                                <a href="tables.html"><i class="fa fa-table fa-fw"></i> Recetas</a>
-                            </li>
-                            <li>
-                                <a href="forms.html"><i class="fa fa-edit fa-fw"></i> Informes</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
+                
             </nav>
             <!-- /#page-wrapper --> 
             <div id="page-wrapper">

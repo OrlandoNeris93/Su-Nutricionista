@@ -53,41 +53,48 @@
                         <a href="../salir.php"><i class="fa fa-sign-out fa-fw"></i> Salir</a>
                     </li>
                 </ul>
-                <!-- /.navbar-top-links -->
-
-                <div class="navbar-default sidebar" role="navigation">
-                    <div class="sidebar-nav navbar-collapse">
-                        <ul class="nav" id="side-menu">                            
-                            <li>
-                                <a href="index.html" class="active"><i class="fa fa-home fa-fw"></i> Principal</a>
-                            </li>                            
-                            <li>
-                                <a href="forms.html"><i class="fa fa-user fa-fw"></i> Perfil</a>
-                            </li>
-                            <li>
-                                <a href="pacientes.html"><i class="fa fa-users fa-fw"></i> Pacientes</a>
-                            </li>
-                            <li>
-                                <a href="tables.html"><i class="fa fa-table fa-fw"></i> Recetas</a>
-                            </li>
-                            <li>
-                                <a href="forms.html"><i class="fa fa-edit fa-fw"></i> Informes</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
+                
+                <!-- /.navbar-top-links -->                
+              <?php  require_once "navbar.php";  // se incluye archivo del navbar ?>
+               
             </nav>
             <!-- /#page-wrapper --> 
             <div id="page-wrapper">
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-lg-12">
-                            <h1 class="page-header bold h1"><i class="fa fa-user-plus fa-fw"></i> Añadir Paciente</h1>
+                            <h1 class="page-header bold h1"><i class="fa fa-user fa-fw"></i> Perfil</h1>
                         </div>
                         <!-- /.col-lg-12 -->
                     </div>
                     <!-- /.row  </form>-->
                     <div class="row">
+                        <div class="col-lg-12">
+                            <div class="panel panel-default">
+                                <div class="panel-heading h2 bold"> Datos de la Cuenta </div>
+                                <div class="panel-body">
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <form role="form">
+                                                <div class="form-group col-lg-6">
+                                                    <label>Usuario</label>
+                                                    <input class="form-control" value="SusiGomez1"  pattern="[A-Za-z0-9_-]{1,15}" title="No se Pueden utilizar caracteres especiales (! + * < > ? ¿ @ )" required>
+                                                </div>                                                
+                                                <div class="form-group col-lg-6">
+                                                    <label>Contraseña</label>
+                                                    <input type="password" class="form-control" value="dadsadsad" pattern="[A-Za-z0-9_-]{1,15}" title="No se Pueden utilizar caracteres especiales (! + * < > ? ¿ @ )" required>
+                                                </div>
+                                                <div class="form-group col-lg-6 justify-content-center">
+                                                    <button type="input" class="btn btn-outline btn-success">
+                                                        <font style="vertical-align: inherit;"></font>
+                                                        <font style="vertical-align: inherit;"><i class="fa fa-refresh fa-fw"></i> Actualizar Datos</font>
+                                                    </button>
+                                                </div>  
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                             <div class="panel panel-default">
                                 <div class="panel-heading h2 bold"> Datos Personales </div>
                                 <div class="panel-body">
@@ -102,25 +109,11 @@
                                                 <input  class="form-control" value="Gomez" required>
                                             </div>
                                             <div class="form-group col-lg-6">
-                                                <label>D.N.I.</label>
+                                                <label>CUIT</label>
                                                 <input type="text" class="form-control" value="123456789"  pattern="[0-9]{1,10}" title="Solo se permiten NUMEROS!" required>
-                                            </div>     
-
-                                            <div class="form-group col-lg-6">
-                                                <label>Fecha de Nac</label>
-                                                <input type="date" class="form-control" required >
                                             </div>
-
                                             <div class="form-group col-lg-6">
-                                                <label>Sexo</label>
-                                                <select name="seleccio_sexo" id=""  class="form-control">
-                                                    <option value="1">Masculino</option>
-                                                    <option value="2">Femenino</option>
-                                                </select>                                                
-                                            </div>
-
-                                            <div class="form-group col-lg-6">
-                                                <label>Correo Electronico</label>
+                                                <label>Correo</label>
                                                 <input type="email" class="form-control" required >
                                             </div>
 
@@ -132,20 +125,21 @@
                                                 <label>Direccion</label>
                                                 <input type="text" class="form-control"  pattern="[A-Za-z0-9_-]{1,15}" title="No se Pueden utilizar caracteres especiales (! + * < > ? ¿ @ )" required >
                                             </div>
-                                            
+                                            <div class="form-group col-lg-6">
+                                                <label>Matricula Profesional</label>
+                                                <input number="text" class="form-control"  pattern="[0-9]{1,10}" title="Solo se admiten NUMEROS." required >
+                                            </div>
+                                            <div class="form-group col-lg-6">
+                                                <label>Titulo </label>
+                                                <input type="text" class="form-control"  pattern="[A-Za-z]{1,30}" title="No se Pueden utilizar caracteres especiales (! + * < > ? ¿ @ )" required >
+                                            </div>
                                             <div class="form-group col-lg-6 justify-content-center align-items-center">
-                                                <button type="input" class="btn btn-primary btn-block col-3" >
+                                                <button type="input" class="btn btn-outline btn-success">
                                                     <font style="vertical-align: inherit;"></font>
-                                                    <font style="vertical-align: inherit;"><i class="fa fa-save fa-fw"></i> Guardar</font>
+                                                    <font style="vertical-align: inherit;"><i class="fa fa-refresh fa-fw"></i> Actualizar Datos</font>
                                                 </button>
-                                            </div> 
+                                            </div>                                            
 
-                                            <div class="form-group col-lg-6 justify-content-center align-items-center">
-                                                <a href="add_consulta.html" class="btn btn-success btn-block col-3" style="display: none;" >
-                                                    <font style="vertical-align: inherit;"></font>
-                                                    <font style="vertical-align: inherit;"><i class="fa fa-plus fa-fw"></i> Ingresar Consulta</font>
-                                                </a>
-                                            </div> 
                                         </form>
                                     </div>
                                     <!-- /.row (nested) -->

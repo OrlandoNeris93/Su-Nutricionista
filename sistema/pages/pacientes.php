@@ -53,29 +53,10 @@
                         <a href="../salir.php"><i class="fa fa-sign-out fa-fw"></i> Salir</a>
                     </li>
                 </ul>
-                <!-- /.navbar-top-links -->
-
-                <div class="navbar-default sidebar" role="navigation">
-                    <div class="sidebar-nav navbar-collapse">
-                        <ul class="nav" id="side-menu">                            
-                            <li>
-                                <a href="index.html" class="active"><i class="fa fa-home fa-fw"></i> Principal</a>
-                            </li>                            
-                            <li>
-                                <a href="forms.html"><i class="fa fa-user fa-fw"></i> Perfil</a>
-                            </li>
-                            <li>
-                                <a href="pacientes.html"><i class="fa fa-users fa-fw"></i> Pacientes</a>
-                            </li>
-                            <li>
-                                <a href="tables.html"><i class="fa fa-table fa-fw"></i> Recetas</a>
-                            </li>
-                            <li>
-                                <a href="forms.html"><i class="fa fa-edit fa-fw"></i> Informes</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
+                
+                <!-- /.navbar-top-links -->                
+              <?php  require_once "navbar.php";  // se incluye archivo del navbar ?>
+               
             </nav>
             <!-- /#page-wrapper --> 
             <div id="page-wrapper">
@@ -104,7 +85,7 @@
                                                 </div>
                                             </div>                                                
                                             <div class="form-group col-lg-6">
-                                                <a href="add_paciente.html" class="btn btn-outline btn-primary btn-lg btn-block"  style="height: 43px;"><i class="fa fa-user-plus "></i>  Añadir Paciente</a>
+                                                <a href="add_paciente.php" class="btn btn-outline btn-primary btn-lg btn-block"  style="height: 43px;"><i class="fa fa-user-plus "></i>  Añadir Paciente</a>
                                             </div>  
                                         </form>
                                     </div>
