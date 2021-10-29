@@ -1,5 +1,46 @@
+<?php 
+session_start();
+
+if(empty($_SESSION)) // si no existe session iniciada, sera redireccionado al login-
+{
+    header('location: ../../');
+    //echo "sesion vacia"; exit;
+    
+}else{
+
+    print_r($_SESSION); 
+
+    if(empty($_SESSION['id_usuario']))  // si no existe id de usuario, sera redireccionado al login-
+    {
+        header('location: ../../');    
+
+    }else{
+        //$id_usuario = $_SESSION['id_usuario'];
+        //echo "<br>".$id_usuario; 
+    }
+
+    
+}
 
 
+ 
+/*
+if($_SESSION['estado'] == true)
+{
+   
+ if(!empty($_SESSION['id_usuario']))
+    {
+        $id_usuario = $_SESSION['id_usuario'];
+        echo $id_usuario;
+    }else{
+        header('location: ../../index.php');
+    }
+}else{
+    header('location: ../');
+} 
+*/
+
+?>
 
 <!DOCTYPE html>
 <html lang="en">

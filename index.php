@@ -1,10 +1,12 @@
 <?php 
 
 $alert = '';
+
 session_start();
-if(!empty($_SESSION['estado']))
+
+if(!empty($_SESSION))
 {
-  header('location: sistema/index.html');
+  header('location: sistema/');
 }else{
   
   if(!empty($_POST))
@@ -34,7 +36,7 @@ if(!empty($_SESSION['estado']))
         $_SESSION['estado']=true;
         $_SESSION['id_usuario'] = $id['id'];
 
-        header('location: sistema/index.html');
+        header('location: sistema/');
 
       }else{
         $alert = 'Usuario o Clave Incorrecta';
