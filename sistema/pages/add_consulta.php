@@ -1,6 +1,3 @@
-
-
-
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -10,7 +7,7 @@
         <meta name="description" content="">
         <meta name="author" content="">
 
-        <title>Su Nutri - Sistema Experto</title>
+        <title>Su Nutri - Sistema de Soporte para Nutricionistas</title>
 
         <!-- Bootstrap Core CSS -->
         <link href="../css/bootstrap.min.css" rel="stylesheet">
@@ -18,18 +15,18 @@
         <!-- MetisMenu CSS -->
         <link href="../css/metisMenu.min.css" rel="stylesheet">
 
-        <!-- Timeline CSS -->
-        <link href="../css/timeline.css" rel="stylesheet">
-
         <!-- Custom CSS -->
         <link href="../css/startmin.css" rel="stylesheet">
-
-        <!-- Morris Charts CSS -->
-        <link href="../css/morris.css" rel="stylesheet">
 
         <!-- Custom Fonts -->
         <link href="../css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
     </head>
     <body>
 
@@ -54,15 +51,36 @@
                     </li>
                 </ul>
                 <!-- /.navbar-top-links -->
-                
-                <!-- /.navbar-top-links -->                
-                <?php  require_once "navbar.php";  // se incluye archivo del navbar ?>
 
-                
+                <div class="navbar-default sidebar" role="navigation">
+                    <div class="sidebar-nav navbar-collapse">
+                        <ul class="nav" id="side-menu">                            
+                            <li>
+                                <a href="index.php" class="active"><i class="fa fa-home fa-fw"></i> Principal</a>
+                            </li>                            
+                            <li>
+                                <a href="perfil.php"><i class="fa fa-user fa-fw"></i> Perfil</a>
+                            </li>
+                            <li>
+                                <a href="pacientes.php"><i class="fa fa-users fa-fw"></i> Pacientes</a>
+                            </li>
+                            <li>
+                                <a href="#"><i class="fa fa-table fa-fw"></i> Recetas</a>
+                            </li>
+                            <li>
+                                <a href="#"><i class="fa fa-cubes fa-fw"></i> Ingredientes</a>
+                            </li>
+                            <li>
+                                <a href="#"><i class="fa fa-edit fa-fw"></i> Informes</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
             </nav>
-            <!-- /#page-wrapper --> 
+            <!-- Page Content -->
             <div id="page-wrapper">
-                <div class="container-fluid">
+            <div class="container-fluid">
                     <div class="row">
                         <div class="col-lg-12">
                             <h1 class="page-header bold h1"><i class="fa fa-plus-circle fa-fw"></i> Añadir Consulta</h1>
@@ -116,7 +134,6 @@
                             <div class="panel-body">
                                 <div class="row">
                                     <form role="form">
-
                                         <div class="panel-body">
                                             <div class="row">
                                                 <div class="form-group col-lg-4">
@@ -215,10 +232,14 @@
                         <!-- /.panel -->
 
                     <!-- /.col-lg-12 -->
+
                 </div>
-                <!-- /.container-fluid -->
-            </div>   
+                    <!-- /.container-fluid -->
+            </div>
+
             <!-- /#page-wrapper -->
+
+
 
         </div>
         <!-- /#wrapper -->
@@ -232,13 +253,10 @@
         <!-- Metis Menu Plugin JavaScript -->
         <script src="../js/metisMenu.min.js"></script>
 
-        <!-- Morris Charts JavaScript -->
-        <script src="../js/raphael.min.js"></script>
-        <script src="../js/morris.min.js"></script>
-        <script src="../js/morris-data.js"></script>
-
         <!-- Custom Theme JavaScript -->
         <script src="../js/startmin.js"></script>
+
+        <script src="functions.js"></script>
 
     </body>
 </html>
