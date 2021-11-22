@@ -129,11 +129,567 @@
                     </div>
                     <!-- /.row -->
                     <div class="row">
-                        <div class="panel panel-default">
-                            <div class="panel-heading h2 bold"> Datos de la Consulta </div>
+                        <div class="panel panel-default" id="panel-datos-consulta">
+                            <div class="panel-heading h2 bold">
+                                Datos de la Consulta
+                                <span class="btn btn-primary btn-outline"><i class="fa fa-save"></i> Guardar</span>
+                                <span class="btn btn-success btn-outline"><i class="fa fa-edit"></i> Editar</span> 
+                                <span class=""><i class="fa fa-plus fa-x3"></i></span> 
+                                <span class=""><i class="fa fa-minus fa-x3"></i></span>    
+                                </div>
+                            
                             <div class="panel-body">
                                 <div class="row">
-                                    <form role="form">
+                                    <form id="addconsulta_formdatosconsultaF1"  role="form">
+                                        <div class="panel-body">
+                                            <div class="row">
+                                                <div class="form-group col-lg-4">
+                                                    <label>Fecha Consulta</label>
+                                                    <input type="date" class="form-control"  required>
+                                                </div>                                                
+                                                <div class="form-group col-lg-2">
+                                                    <label>Hora Consulta</label>
+                                                    <input type="time"  class="form-control" value="Gomez" required>
+                                                </div> 
+                                            </div>                                            
+                                        </div>
+                                        <div class="form-group col-lg-3">
+                                            <label>Edad (Actual)</label>
+                                            <input type="number"  class="form-control" placeholder="29" required>
+                                        </div>
+                                        <div class="form-group col-lg-3">
+                                            <label>Peso (KG)</label>
+                                            <input type="number"  class="form-control" placeholder="87,34" required>
+                                        </div>
+                                        <div class="form-group col-lg-3">
+                                            <label>Talla (CM)</label>
+                                            <input  class="form-control" placeholder="180" required>
+                                        </div>
+                                        <div class="form-group col-lg-3">
+                                            <label>Indice de Masa Corporal (IMC)</label>
+                                            <input  class="form-control" value="123" required disabled>
+                                        </div>
+                                        <div class="form-group col-lg-4">
+                                            <label>Circunferencia de Cintura (CM)</label>
+                                            <input type="number" class="form-control" value="1245" required>
+                                        </div>     
+
+                                        <div class="form-group col-lg-4">
+                                            <label>Circunferencia de Cadera (CM) </label>
+                                            <input type="text" class="form-control" required>
+                                        </div>
+                                        <div class="form-group col-lg-4">
+                                            <label>Cuantos hijos tiene? </label>
+                                            <input type="text" class="form-control" required>
+                                        </div> 
+
+                                        <div class="panel-heading h2 bold col-lg-12"> Bioimpedancia </div>
+                                        <div class="panel-body">
+                                            <div class="row">
+                                                <form role="form">
+                                                    <div class="form-group col-lg-4">
+                                                        <label>     % de Masa Muscular</label>
+                                                        <input class="form-control" placeholder="21.4" required>
+                                                    </div>                                                
+                                                    <div class="form-group col-lg-4">
+                                                        <label>     % de Masa Grasa</label>
+                                                        <input  class="form-control" placeholder="21.4" required >
+                                                    </div>
+                                                    <div class="form-group col-lg-4">
+                                                        <label>     % de Masa Visceral</label>
+                                                        <input  class="form-control" placeholder="21.4" required>
+                                                    </div>     
+                                                </form>
+                                            </div>
+                                            <!-- /.row (nested) -->
+                                        </div>
+
+                                        <div class="panel-heading h2 bold col-lg-12"> Actividad Fisica </div>
+                                        <div class="panel-body">
+                                            <div class="row">
+                                                <form role="form">
+                                                    <div class="form-group col-lg-4">
+                                                        <label>Factor de Actividad</label>
+                                                        <select name="factorActividad" id=""  class="form-control">
+                                                            <option value="1">Sedentario</option>
+                                                            <option value="2">Activo</option>
+                                                        </select>                                                
+                                                    </div>                                                
+                                                    <div class="form-group col-lg-3">
+                                                        <label>Horas de Actividad Fisica diaria</label>
+                                                        <input type="number" class="form-control" placeholder="2" required>
+                                                    </div>
+                                                    
+                                                    <div class="form-group col-lg-10">
+                                                        <label>Observaciones </label>
+                                                        <textarea class="form-control" placeholder="Observaciones.." cols="30" rows="10"></textarea>
+                                                    </div>
+
+                                                </form>
+                                            </div>
+                                            <!-- /.row (nested) -->
+                                        </div>
+                                        
+                                    </form>
+                                </div>
+                                <!-- /.row (nested) -->
+                            </div>
+                            <!-- /.panel-body -->
+                        </div>
+
+
+                        <div class="panel panel-default" id="panel-detalle-plan">
+                            <div class="panel-heading h2 bold">
+                                Detalles del Plan 
+                                <span class="btn btn-primary btn-outline"><i class="fa fa-save"></i> Guardar</span>
+                                <span class="btn btn-success btn-outline"><i class="fa fa-edit"></i> Editar</span> 
+                                <span class=""><i class="fa fa-plus fa-x3"></i></span> 
+                                <span class=""><i class="fa fa-minus fa-x3"></i></span>    
+                                </div>
+                            
+                            <div class="panel-body">
+                                <div class="row">
+                                    <form id=""  role="form">
+                                        <div class="panel-body">
+                                            <div class="row">
+                                                <div class="form-group col-lg-4">
+                                                    <label>Peso Ideal</label>
+                                                    <select name="" id="peso_ideal" class="form-control">
+                                                        <option value="0">Seleccione Indice..</option>
+                                                        <option value="1">Indice de Brocca</option>
+                                                        <option value="0">Indice de Hamwi</option>
+                                                    </select>
+                                                </div>                                                
+                                                <div class="form-group col-lg-4">
+                                                    <label>Peso Ideal Segun Indice</label>
+                                                    <input type="number"  class="form-control" value="123" required disabled>
+                                                </div> 
+                                            
+                                                <div class="form-group col-lg-4">
+                                                    <label>Calcular Peso Saludable </label><tr></tr> <a class=""><i class="fa fa-dashboard fa-x5"></i></a>
+                                                    <input type="number"  class="form-control col-lg-3" placeholder="29" required disabled>
+                                                </div>
+                                            </div>                                          
+                                            
+                                        </div>
+
+                                        
+                                        <div class="form-group col-lg-3">
+                                            <label>Peso (KG)</label>
+                                            <input type="number"  class="form-control" placeholder="87,34" required>
+                                        </div>
+                                        <div class="form-group col-lg-3">
+                                            <label>Talla (CM)</label>
+                                            <input  class="form-control" placeholder="180" required>
+                                        </div>
+                                        <div class="form-group col-lg-3">
+                                            <label>Indice de Masa Corporal (IMC)</label>
+                                            <input  class="form-control" value="123" required disabled>
+                                        </div>
+                                        <div class="form-group col-lg-4">
+                                            <label>Circunferencia de Cintura (CM)</label>
+                                            <input type="number" class="form-control" value="1245" required>
+                                        </div>     
+
+                                        <div class="form-group col-lg-4">
+                                            <label>Circunferencia de Cadera (CM) </label>
+                                            <input type="text" class="form-control" required>
+                                        </div>
+                                        <div class="form-group col-lg-4">
+                                            <label>Cuantos hijos tiene? </label>
+                                            <input type="text" class="form-control" required>
+                                        </div> 
+
+                                        <div class="panel-heading h2 bold col-lg-12"> Bioimpedancia </div>
+                                        <div class="panel-body">
+                                            <div class="row">
+                                                <form role="form">
+                                                    <div class="form-group col-lg-4">
+                                                        <label>     % de Masa Muscular</label>
+                                                        <input class="form-control" placeholder="21.4" required>
+                                                    </div>                                                
+                                                    <div class="form-group col-lg-4">
+                                                        <label>     % de Masa Grasa</label>
+                                                        <input  class="form-control" placeholder="21.4" required >
+                                                    </div>
+                                                    <div class="form-group col-lg-4">
+                                                        <label>     % de Masa Visceral</label>
+                                                        <input  class="form-control" placeholder="21.4" required>
+                                                    </div>     
+                                                </form>
+                                            </div>
+                                            <!-- /.row (nested) -->
+                                        </div>
+
+                                        <div class="panel-heading h2 bold col-lg-12"> Actividad Fisica </div>
+                                        <div class="panel-body">
+                                            <div class="row">
+                                                <form role="form">
+                                                    <div class="form-group col-lg-4">
+                                                        <label>Factor de Actividad</label>
+                                                        <select name="factorActividad" id=""  class="form-control">
+                                                            <option value="1">Sedentario</option>
+                                                            <option value="2">Activo</option>
+                                                        </select>                                                
+                                                    </div>                                                
+                                                    <div class="form-group col-lg-3">
+                                                        <label>Horas de Actividad Fisica diaria</label>
+                                                        <input type="number" class="form-control" placeholder="2" required>
+                                                    </div>
+                                                    
+                                                    <div class="form-group col-lg-10">
+                                                        <label>Observaciones </label>
+                                                        <textarea class="form-control" placeholder="Observaciones.." cols="30" rows="10"></textarea>
+                                                    </div>
+
+                                                </form>
+                                            </div>
+                                            <!-- /.row (nested) -->
+                                        </div>
+                                        
+                                    </form>
+                                </div>
+                                <!-- /.row (nested) -->
+                            </div>
+                            <!-- /.panel-body -->
+                        </div>
+                        
+                        <div class="panel panel-default" > 
+                            <div class="panel-heading h2 bold">
+                                Datos de la Consulta
+                                <span class="btn btn-primary btn-outline"><i class="fa fa-save"></i> Guardar</span>
+                                <span class="btn btn-success btn-outline"><i class="fa fa-edit"></i> Editar</span> 
+                                <span class=""><i class="fa fa-plus fa-x3"></i></span> 
+                                <span class=""><i class="fa fa-minus fa-x3"></i></span>    
+                                </div>
+                            
+                            <div class="panel-body">
+                                <div class="row">
+                                    <form id="addconsulta_formdatosconsultaF1"  role="form">
+                                        <div class="panel-body">
+                                            <div class="row">
+                                                <div class="form-group col-lg-4">
+                                                    <label>Fecha Consulta</label>
+                                                    <input type="date" class="form-control"  required>
+                                                </div>                                                
+                                                <div class="form-group col-lg-2">
+                                                    <label>Hora Consulta</label>
+                                                    <input type="time"  class="form-control" value="Gomez" required>
+                                                </div> 
+                                            </div>                                            
+                                        </div>
+                                        <div class="form-group col-lg-3">
+                                            <label>Edad (Actual)</label>
+                                            <input type="number"  class="form-control" placeholder="29" required>
+                                        </div>
+                                        <div class="form-group col-lg-3">
+                                            <label>Peso (KG)</label>
+                                            <input type="number"  class="form-control" placeholder="87,34" required>
+                                        </div>
+                                        <div class="form-group col-lg-3">
+                                            <label>Talla (CM)</label>
+                                            <input  class="form-control" placeholder="180" required>
+                                        </div>
+                                        <div class="form-group col-lg-3">
+                                            <label>Indice de Masa Corporal (IMC)</label>
+                                            <input  class="form-control" value="123" required disabled>
+                                        </div>
+                                        <div class="form-group col-lg-4">
+                                            <label>Circunferencia de Cintura (CM)</label>
+                                            <input type="number" class="form-control" value="1245" required>
+                                        </div>     
+
+                                        <div class="form-group col-lg-4">
+                                            <label>Circunferencia de Cadera (CM) </label>
+                                            <input type="text" class="form-control" required>
+                                        </div>
+                                        <div class="form-group col-lg-4">
+                                            <label>Cuantos hijos tiene? </label>
+                                            <input type="text" class="form-control" required>
+                                        </div> 
+
+                                        <div class="panel-heading h2 bold col-lg-12"> Bioimpedancia </div>
+                                        <div class="panel-body">
+                                            <div class="row">
+                                                <form role="form">
+                                                    <div class="form-group col-lg-4">
+                                                        <label>     % de Masa Muscular</label>
+                                                        <input class="form-control" placeholder="21.4" required>
+                                                    </div>                                                
+                                                    <div class="form-group col-lg-4">
+                                                        <label>     % de Masa Grasa</label>
+                                                        <input  class="form-control" placeholder="21.4" required >
+                                                    </div>
+                                                    <div class="form-group col-lg-4">
+                                                        <label>     % de Masa Visceral</label>
+                                                        <input  class="form-control" placeholder="21.4" required>
+                                                    </div>     
+                                                </form>
+                                            </div>
+                                            <!-- /.row (nested) -->
+                                        </div>
+
+                                        <div class="panel-heading h2 bold col-lg-12"> Actividad Fisica </div>
+                                        <div class="panel-body">
+                                            <div class="row">
+                                                <form role="form">
+                                                    <div class="form-group col-lg-4">
+                                                        <label>Factor de Actividad</label>
+                                                        <select name="factorActividad" id=""  class="form-control">
+                                                            <option value="1">Sedentario</option>
+                                                            <option value="2">Activo</option>
+                                                        </select>                                                
+                                                    </div>                                                
+                                                    <div class="form-group col-lg-3">
+                                                        <label>Horas de Actividad Fisica diaria</label>
+                                                        <input type="number" class="form-control" placeholder="2" required>
+                                                    </div>
+                                                    
+                                                    <div class="form-group col-lg-10">
+                                                        <label>Observaciones </label>
+                                                        <textarea class="form-control" placeholder="Observaciones.." cols="30" rows="10"></textarea>
+                                                    </div>
+
+                                                </form>
+                                            </div>
+                                            <!-- /.row (nested) -->
+                                        </div>
+                                        
+                                    </form>
+                                </div>
+                                <!-- /.row (nested) -->
+                            </div>
+                            <!-- /.panel-body -->
+                        </div>
+
+                        <div class="panel panel-default">
+                            <div class="panel-heading h2 bold">
+                                Datos de la Consulta
+                                <span class="btn btn-primary btn-outline"><i class="fa fa-save"></i> Guardar</span>
+                                <span class="btn btn-success btn-outline"><i class="fa fa-edit"></i> Editar</span> 
+                                <span class=""><i class="fa fa-plus fa-x3"></i></span> 
+                                <span class=""><i class="fa fa-minus fa-x3"></i></span>    
+                                </div>
+                            
+                            <div class="panel-body">
+                                <div class="row">
+                                    <form id="addconsulta_formdatosconsultaF1"  role="form">
+                                        <div class="panel-body">
+                                            <div class="row">
+                                                <div class="form-group col-lg-4">
+                                                    <label>Fecha Consulta</label>
+                                                    <input type="date" class="form-control"  required>
+                                                </div>                                                
+                                                <div class="form-group col-lg-2">
+                                                    <label>Hora Consulta</label>
+                                                    <input type="time"  class="form-control" value="Gomez" required>
+                                                </div> 
+                                            </div>                                            
+                                        </div>
+                                        <div class="form-group col-lg-3">
+                                            <label>Edad (Actual)</label>
+                                            <input type="number"  class="form-control" placeholder="29" required>
+                                        </div>
+                                        <div class="form-group col-lg-3">
+                                            <label>Peso (KG)</label>
+                                            <input type="number"  class="form-control" placeholder="87,34" required>
+                                        </div>
+                                        <div class="form-group col-lg-3">
+                                            <label>Talla (CM)</label>
+                                            <input  class="form-control" placeholder="180" required>
+                                        </div>
+                                        <div class="form-group col-lg-3">
+                                            <label>Indice de Masa Corporal (IMC)</label>
+                                            <input  class="form-control" value="123" required disabled>
+                                        </div>
+                                        <div class="form-group col-lg-4">
+                                            <label>Circunferencia de Cintura (CM)</label>
+                                            <input type="number" class="form-control" value="1245" required>
+                                        </div>     
+
+                                        <div class="form-group col-lg-4">
+                                            <label>Circunferencia de Cadera (CM) </label>
+                                            <input type="text" class="form-control" required>
+                                        </div>
+                                        <div class="form-group col-lg-4">
+                                            <label>Cuantos hijos tiene? </label>
+                                            <input type="text" class="form-control" required>
+                                        </div> 
+
+                                        <div class="panel-heading h2 bold col-lg-12"> Bioimpedancia </div>
+                                        <div class="panel-body">
+                                            <div class="row">
+                                                <form role="form">
+                                                    <div class="form-group col-lg-4">
+                                                        <label>     % de Masa Muscular</label>
+                                                        <input class="form-control" placeholder="21.4" required>
+                                                    </div>                                                
+                                                    <div class="form-group col-lg-4">
+                                                        <label>     % de Masa Grasa</label>
+                                                        <input  class="form-control" placeholder="21.4" required >
+                                                    </div>
+                                                    <div class="form-group col-lg-4">
+                                                        <label>     % de Masa Visceral</label>
+                                                        <input  class="form-control" placeholder="21.4" required>
+                                                    </div>     
+                                                </form>
+                                            </div>
+                                            <!-- /.row (nested) -->
+                                        </div>
+
+                                        <div class="panel-heading h2 bold col-lg-12"> Actividad Fisica </div>
+                                        <div class="panel-body">
+                                            <div class="row">
+                                                <form role="form">
+                                                    <div class="form-group col-lg-4">
+                                                        <label>Factor de Actividad</label>
+                                                        <select name="factorActividad" id=""  class="form-control">
+                                                            <option value="1">Sedentario</option>
+                                                            <option value="2">Activo</option>
+                                                        </select>                                                
+                                                    </div>                                                
+                                                    <div class="form-group col-lg-3">
+                                                        <label>Horas de Actividad Fisica diaria</label>
+                                                        <input type="number" class="form-control" placeholder="2" required>
+                                                    </div>
+                                                    
+                                                    <div class="form-group col-lg-10">
+                                                        <label>Observaciones </label>
+                                                        <textarea class="form-control" placeholder="Observaciones.." cols="30" rows="10"></textarea>
+                                                    </div>
+
+                                                </form>
+                                            </div>
+                                            <!-- /.row (nested) -->
+                                        </div>
+                                        
+                                    </form>
+                                </div>
+                                <!-- /.row (nested) -->
+                            </div>
+                            <!-- /.panel-body -->
+                        </div>
+
+                        <div class="panel panel-default">
+                            <div class="panel-heading h2 bold">
+                                Datos de la Consulta
+                                <span class="btn btn-primary btn-outline"><i class="fa fa-save"></i> Guardar</span>
+                                <span class="btn btn-success btn-outline"><i class="fa fa-edit"></i> Editar</span> 
+                                <span class=""><i class="fa fa-plus fa-x3"></i></span> 
+                                <span class=""><i class="fa fa-minus fa-x3"></i></span>    
+                                </div>
+                            
+                            <div class="panel-body">
+                                <div class="row">
+                                    <form id="addconsulta_formdatosconsultaF1"  role="form">
+                                        <div class="panel-body">
+                                            <div class="row">
+                                                <div class="form-group col-lg-4">
+                                                    <label>Fecha Consulta</label>
+                                                    <input type="date" class="form-control"  required>
+                                                </div>                                                
+                                                <div class="form-group col-lg-2">
+                                                    <label>Hora Consulta</label>
+                                                    <input type="time"  class="form-control" value="Gomez" required>
+                                                </div> 
+                                            </div>                                            
+                                        </div>
+                                        <div class="form-group col-lg-3">
+                                            <label>Edad (Actual)</label>
+                                            <input type="number"  class="form-control" placeholder="29" required>
+                                        </div>
+                                        <div class="form-group col-lg-3">
+                                            <label>Peso (KG)</label>
+                                            <input type="number"  class="form-control" placeholder="87,34" required>
+                                        </div>
+                                        <div class="form-group col-lg-3">
+                                            <label>Talla (CM)</label>
+                                            <input  class="form-control" placeholder="180" required>
+                                        </div>
+                                        <div class="form-group col-lg-3">
+                                            <label>Indice de Masa Corporal (IMC)</label>
+                                            <input  class="form-control" value="123" required disabled>
+                                        </div>
+                                        <div class="form-group col-lg-4">
+                                            <label>Circunferencia de Cintura (CM)</label>
+                                            <input type="number" class="form-control" value="1245" required>
+                                        </div>     
+
+                                        <div class="form-group col-lg-4">
+                                            <label>Circunferencia de Cadera (CM) </label>
+                                            <input type="text" class="form-control" required>
+                                        </div>
+                                        <div class="form-group col-lg-4">
+                                            <label>Cuantos hijos tiene? </label>
+                                            <input type="text" class="form-control" required>
+                                        </div> 
+
+                                        <div class="panel-heading h2 bold col-lg-12"> Bioimpedancia </div>
+                                        <div class="panel-body">
+                                            <div class="row">
+                                                <form role="form">
+                                                    <div class="form-group col-lg-4">
+                                                        <label>     % de Masa Muscular</label>
+                                                        <input class="form-control" placeholder="21.4" required>
+                                                    </div>                                                
+                                                    <div class="form-group col-lg-4">
+                                                        <label>     % de Masa Grasa</label>
+                                                        <input  class="form-control" placeholder="21.4" required >
+                                                    </div>
+                                                    <div class="form-group col-lg-4">
+                                                        <label>     % de Masa Visceral</label>
+                                                        <input  class="form-control" placeholder="21.4" required>
+                                                    </div>     
+                                                </form>
+                                            </div>
+                                            <!-- /.row (nested) -->
+                                        </div>
+
+                                        <div class="panel-heading h2 bold col-lg-12"> Actividad Fisica </div>
+                                        <div class="panel-body">
+                                            <div class="row">
+                                                <form role="form">
+                                                    <div class="form-group col-lg-4">
+                                                        <label>Factor de Actividad</label>
+                                                        <select name="factorActividad" id=""  class="form-control">
+                                                            <option value="1">Sedentario</option>
+                                                            <option value="2">Activo</option>
+                                                        </select>                                                
+                                                    </div>                                                
+                                                    <div class="form-group col-lg-3">
+                                                        <label>Horas de Actividad Fisica diaria</label>
+                                                        <input type="number" class="form-control" placeholder="2" required>
+                                                    </div>
+                                                    
+                                                    <div class="form-group col-lg-10">
+                                                        <label>Observaciones </label>
+                                                        <textarea class="form-control" placeholder="Observaciones.." cols="30" rows="10"></textarea>
+                                                    </div>
+
+                                                </form>
+                                            </div>
+                                            <!-- /.row (nested) -->
+                                        </div>
+                                        
+                                    </form>
+                                </div>
+                                <!-- /.row (nested) -->
+                            </div>
+                            <!-- /.panel-body -->
+                        </div>
+
+                        <div class="panel panel-default">
+                            <div class="panel-heading h2 bold">
+                                Datos de la Consulta
+                                <span class="btn btn-primary btn-outline"><i class="fa fa-save"></i> Guardar</span>
+                                <span class="btn btn-success btn-outline"><i class="fa fa-edit"></i> Editar</span> 
+                                <span class=""><i class="fa fa-plus fa-x3"></i></span> 
+                                <span class=""><i class="fa fa-minus fa-x3"></i></span>    
+                                </div>
+                            
+                            <div class="panel-body">
+                                <div class="row">
+                                    <form id="addconsulta_formdatosconsultaF1"  role="form">
                                         <div class="panel-body">
                                             <div class="row">
                                                 <div class="form-group col-lg-4">
@@ -230,6 +786,7 @@
                             <!-- /.panel-body -->
                         </div>
                         <!-- /.panel -->
+                        
 
                     <!-- /.col-lg-12 -->
 

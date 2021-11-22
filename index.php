@@ -25,29 +25,36 @@ if(!empty($_SESSION))
     {
       // echo "     ".$usuario_str."   ".$clave_str; exit;
 
-      $query_login = mysqli_query($conn,"SELECT usu_id as id FROM usuarios WHERE usu_usuario = '$usuario_str' AND usu_pass = '$clave_str' AND usu_estado = 1");
-      $result = mysqli_num_rows($query_login);
-
-      if($result == 1)
-      {
-        $id= mysqli_fetch_assoc($query_login);
-        
-      // echo $id['id'];       
-        $_SESSION['estado']=true;
-        $_SESSION['id_usuario'] = $id['id'];
-
-        header('location: sistema/');
-
-      }else{
+      $query_login = mysqli_query($conn,"CALL proc_login('$usuario_str','$clave_str');");
+      $result = mysqli_fetch_assoc($query_login);
+      
+      if(empty($result))
+      {        
         $alert = 'Usuario o Clave Incorrecta';
         session_destroy();
-      }
+
+      }else{        
+        if($result['id_tipo'] == 3)
+        {         
+           
+          $id_usuario = $result['id_usuario'];
+
+          // echo $id['id'];       
+          $_SESSION['estado']=true;
+          $_SESSION['id_usuario'] =  $id_usuario;
+
+          header('location: sistema/');
+
+        }else{
+          
+          echo "esta seccion aun no se encuentra disponible" ; exit;
+
+        }
+      }      
 
     }else{
-      $alert = 'Error al Ingresar, Caracteres invalidos..';
+      $alert = 'Usuario o Clave Erroneos.. ';
     }
-
-
 
     mysqli_close($conn);
   }
