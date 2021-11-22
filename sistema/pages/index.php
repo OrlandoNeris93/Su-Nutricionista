@@ -1,3 +1,15 @@
+
+<?php
+    session_start();
+
+    if(empty( $_SESSION['estado']))
+    {
+        session_destroy();
+        header('location: ../../');
+        
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -59,7 +71,7 @@
                                 <a href="index.php" class="active"><i class="fa fa-home fa-fw"></i> Principal</a>
                             </li>                            
                             <li>
-                                <a href="perfil.php"><i class="fa fa-user fa-fw"></i> Perfil</a>
+                                <a href="profesional/"><i class="fa fa-user fa-fw"></i> Perfil</a>
                             </li>
                             <li>
                                 <a href="pacientes.php"><i class="fa fa-users fa-fw"></i> Pacientes</a>

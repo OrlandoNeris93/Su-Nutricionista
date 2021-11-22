@@ -42,7 +42,7 @@ if(!empty($_SESSION))
           // echo $id['id'];       
           $_SESSION['estado']=true;
           $_SESSION['id_usuario'] =  $id_usuario;
-
+          
           header('location: sistema/');
 
         }else{

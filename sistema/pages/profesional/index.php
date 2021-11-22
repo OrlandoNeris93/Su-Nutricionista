@@ -1,3 +1,38 @@
+<?php
+    
+    require_once('../../../conexion.php');
+    session_start();
+
+    if(empty($_SESSION['estado']))
+    {
+        session_destroy();
+        header('location: ../../../');
+        
+    }else{
+        //echo "si existe session";   
+        
+        $id_usuario =  $_SESSION['id_usuario'];  
+
+        $query_info = mysqli_query($conn,"CALL consulta_info_profesional('$id_usuario');");
+
+        $resultado = mysqli_fetch_assoc($query_info);
+
+        $usuario = $resultado['usuario'];
+        $clave = $resultado['clave'];
+        $nombre = $resultado['nombre'];
+        $apellido = $resultado['apellido'];
+        $direccion = $resultado['direccion'];
+        $telefono = $resultado['telefono'];
+        $dni = $resultado['dni'];
+        $correo = $resultado['correo'];
+        $matricula = $resultado['matricula'];
+        $titulo = $resultado['titulo'];
+
+        //echo $usuario.'  '.$clave.'  '.$nombre.'  '.$apellido.'  '.$direccion.'  '.$telefono.'  '.$dni.'  '.$correo.'  '.$matricula.'  '.$titulo; exit;
+    }    
+    
+?>  
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -10,16 +45,16 @@
         <title>Su Nutri - Sistema de Soporte para Nutricionistas</title>
 
         <!-- Bootstrap Core CSS -->
-        <link href="../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../../css/bootstrap.min.css" rel="stylesheet">
 
         <!-- MetisMenu CSS -->
-        <link href="../css/metisMenu.min.css" rel="stylesheet">
+        <link href="../../css/metisMenu.min.css" rel="stylesheet">
 
         <!-- Custom CSS -->
-        <link href="../css/startmin.css" rel="stylesheet">
+        <link href="../../css/startmin.css" rel="stylesheet">
 
         <!-- Custom Fonts -->
-        <link href="../css/font-awesome.min.css" rel="stylesheet" type="text/css">
+        <link href="../../css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -47,7 +82,7 @@
 
                 <ul class="nav navbar-right navbar-top-links">                   
                     <li class="dropdown">
-                        <a href="../salir.php"><i class="fa fa-sign-out fa-fw"></i> Salir</a>
+                        <a href="../../salir.php"><i class="fa fa-sign-out fa-fw"></i> Salir</a>
                     </li>
                 </ul>
                 <!-- /.navbar-top-links -->
@@ -56,13 +91,13 @@
                     <div class="sidebar-nav navbar-collapse">
                         <ul class="nav" id="side-menu">                            
                             <li>
-                                <a href="index.php" class="active"><i class="fa fa-home fa-fw"></i> Principal</a>
+                                <a href="../index.php" class="active"><i class="fa fa-home fa-fw"></i> Principal</a>
                             </li>                            
                             <li>
-                                <a href="perfil.php"><i class="fa fa-user fa-fw"></i> Perfil</a>
+                                <a href="../perfil.php"><i class="fa fa-user fa-fw"></i> Perfil</a>
                             </li>
                             <li>
-                                <a href="pacientes.php"><i class="fa fa-users fa-fw"></i> Pacientes</a>
+                                <a href="../pacientes.php"><i class="fa fa-users fa-fw"></i> Pacientes</a>
                             </li>
                             <li>
                                 <a href="#"><i class="fa fa-table fa-fw"></i> Recetas</a>
@@ -83,100 +118,101 @@
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-lg-12">
-                            <h1 class="page-header">Principal</h1>
+                            <h1 class="page-header"><i class="fa fa-user fa-fw fa-x4"></i> Perfil del Profesional </h1>
                         </div>
                         <!-- /.col-lg-12 -->
                     </div>
                     <!-- /.row -->
                 </div>
-
                 <div class="row">
-                    <div class="col-lg-3 col-md-6">
-                            <div class="panel panel-primary">
-                                <div class="panel-heading">
-                                    <div class="row ">
-                                        <div class="col-xs-3">
-                                            <i class="fa fa-plus fa-5x"></i>
-                                        </div>
-                                        <div class="col-xs-9 text-right h2">                                            
-                                            <div>Nueva Consulta</div>
+                        <div class="col-lg-12">
+                            <div class="panel panel-default">
+                                <div class="panel-heading h2 bold"> <i class="fa fa-user fa-fw "></i> Datos de la Cuenta </div>
+                                <div class="panel-body">
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            
+                                            <form role="form">
+                                                <div class="form-group col-lg-5">
+                                                <input type="hidden"  id="id_usuario"value="<?php echo $id_usuario; ?>">
+                                                    <label>Usuario</label>
+                                                    <input class="form-control"  id="usuario_cuenta_prof"value="<?php echo $usuario; ?>"  pattern="[A-Za-z0-9_-]{1,15}" title="No se Pueden utilizar caracteres especiales (! + * < > ? ¿ @ )" required>
+                                                </div>                                                
+                                                <div class="form-group col-lg-5">
+                                                    <label>Contraseña</label>
+                                                    <input type="text"  id="clave_cuenta_prof"class="form-control" value="<?php echo $clave; ?>" pattern="[A-Za-z0-9_-]{1,15}" title="No se Pueden utilizar caracteres especiales (! + * < > ? ¿ @ )" required>
+                                                </div>
+                                                <div class="form-group col-lg-5">
+                                                    <label></label>
+                                                    <button type="input" id="actualizar_datos_cuenta_prof" class="btn btn-outline btn-success btn-lg">                                                        
+                                                        <font style="vertical-align: inherit;"><i class="fa fa-refresh fa-fw"></i> Actualizar Datos</font>
+                                                    </button>
+                                                </div>  
+                                            </form>
                                         </div>
                                     </div>
                                 </div>
-                                <a href="add_consulta.php">
-                                    <div class="panel-footer">                                       
-                                        <span class="pull-right"><i class="fa fa-plus-circle fa-3x"></i></span>
+                            </div>
+                            <div class="panel panel-default">
+                                <div class="panel-heading h2 bold"> Datos Personales </div>
+                                <div class="panel-body">
+                                    <div class="row">
+                                        <form role="form" id="form_datos_pers_prof">
+                                            <input type="hidden"   name="action" value="actualizar_datos_profesional">
+                                            <input type="hidden"   name= "id_usuario" value="<?php echo $id_usuario; ?>">
+                                            <div class="form-group col-lg-6">
+                                                <label>Nombre/es</label>
+                                                <input class="form-control" name="nombre_prof" value="<?php echo $nombre; ?>" required>
+                                            </div>                                                
+                                            <div class="form-group col-lg-6">
+                                                <label>Apellido/s</label>
+                                                <input  class="form-control" name="apellido_prof" value="<?php echo $apellido; ?>" required>
+                                            </div>
+                                            <div class="form-group col-lg-6">
+                                                <label>DNI</label>
+                                                <input type="text" class="form-control" name="dni_prof" value="<?php echo $dni; ?>"  pattern="[0-9]{1,10}" title="Solo se permiten NUMEROS!" required>
+                                            </div>
+                                            <div class="form-group col-lg-6">
+                                                <label>Correo</label>
+                                                <input type="email" class="form-control" name="correo_prof" value="<?php echo $correo; ?>" required >
+                                            </div>
 
-                                        <div class="clearfix"></div>
-                                    </div>
-                                </a>
-                            </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6">
-                            <div class="panel panel-green">
-                                <div class="panel-heading">
-                                    <div class="row">
-                                        <div class="col-xs-3">
-                                            <i class="fa fa-user-plus fa-5x"></i>
-                                        </div>
-                                        <div class="col-xs-9 text-right h2">                            
-                                            <div>Agregar Paciente</div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <a href="add_paciente.php">
-                                    <div class="panel-footer">
-                                        <span class="pull-right"><i class="fa fa-plus-circle fa-3x"></i></span>
-                                        <div class="clearfix"></div>
-                                    </div>
-                                </a>
-                            </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6">
-                            <div class="panel panel-yellow">
-                                <div class="panel-heading">
-                                    <div class="row">
-                                        <div class="col-xs-3">
-                                            <i class="fa fa-book fa-5x"></i>
-                                        </div>
-                                        <div class="col-xs-9 text-right h2">
-                                            <div>Nueva Receta</div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <a href="#">
-                                    <div class="panel-footer">
-                                        <span class="pull-right"><i class="fa fa-plus-circle fa-3x"></i></span>
+                                            <div class="form-group col-lg-6">
+                                                <label>Telefono</label>
+                                                <input type="text" class="form-control" name="telefono_prof"  value="<?php echo $telefono; ?>" pattern="[0-9]{1,15}" title="Numero Completo sin 15, espacios o guiones" required >
+                                            </div>
+                                            <div class="form-group col-lg-6">
+                                                <label>Direccion</label>
+                                                <input type="text" class="form-control" name="direccion_prof"  value="<?php echo $direccion; ?>" pattern="[A-Za-z0-9_-]{1,15}" title="No se Pueden utilizar caracteres especiales (! + * < > ? ¿ @ )" required >
+                                            </div>
+                                            <div class="form-group col-lg-6">
+                                                <label>Matricula Profesional</label>
+                                                <input number="text" class="form-control" name="matricula_prof" value="<?php echo $matricula; ?>"  pattern="[0-9]{1,10}" title="Solo se admiten NUMEROS." required >
+                                            </div>
+                                            <div class="form-group col-lg-6">
+                                                <label>Titulo </label>
+                                                <input type="text" class="form-control" name="titulo_prof"  value="<?php echo $titulo; ?>" pattern="[A-Za-z]{1,30}" title="No se Pueden utilizar caracteres especiales (! + * < > ? ¿ @ )" required >
+                                            </div>
+                                            <div class="form-group col-lg-6 justify-content-center align-items-center">
+                                                <button type="input" id="actualizar_datos_personales" class="btn btn-outline btn-success btn-lg">
+                                                    <font style="vertical-align: inherit;"></font>
+                                                    <font style="vertical-align: inherit;"><i class="fa fa-refresh fa-fw"></i> Actualizar Datos</font>
+                                                </button>
+                                            </div>                                            
 
-                                        <div class="clearfix"></div>
+                                        </form>
                                     </div>
-                                </a>
-                            </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6">
-                            <div class="panel panel-red">
-                                <div class="panel-heading">
-                                    <div class="row">
-                                        <div class="col-xs-3">
-                                            <i class="fa fa-edit fa-5x"></i>
-                                        </div>
-                                        <div class="col-xs-9 text-right h2">
-                                            <div>Nuevo Informe</div>
-                                        </div>
-                                    </div>
+                                    <!-- /.row (nested) -->
                                 </div>
-                                <a href="#">
-                                    <div class="panel-footer">
-                                        <span class="pull-right"><i class="fa fa-plus-circle fa-3x"></i></span>
-                                        <div class="clearfix"></div>
-                                    </div>
-                                </a>
+                                <!-- /.panel-body -->
                             </div>
+                            <!-- /.panel -->
+                        </div>
+                        <!-- /.col-lg-12 -->
                     </div>
-                </div>                
+             
                     <!-- /.container-fluid -->
             </div>
-
             <!-- /#page-wrapper -->
 
 
@@ -185,16 +221,16 @@
         <!-- /#wrapper -->
 
         <!-- jQuery -->
-        <script src="../js/jquery.min.js"></script>
+        <script src="../../js/jquery.min.js"></script>
 
         <!-- Bootstrap Core JavaScript -->
-        <script src="../js/bootstrap.min.js"></script>
+        <script src="../../js/bootstrap.min.js"></script>
 
         <!-- Metis Menu Plugin JavaScript -->
-        <script src="../js/metisMenu.min.js"></script>
+        <script src="../../js/metisMenu.min.js"></script>
 
         <!-- Custom Theme JavaScript -->
-        <script src="../js/startmin.js"></script>
+        <script src="../../js/startmin.js"></script>
 
         <script src="functions.js"></script>
 
