@@ -1,32 +1,44 @@
 
 $(document).ready(function(){       
 
-    $('#form_datos_cuenta_prof').submit(function(e) {
+    $('#buscar_paciente').keyup(function(e) {
         /* Act on the event */
-        e.preventDefault();        
+        e.preventDefault(); 
+
+        var buscar = $('#buscar_paciente').val();
+        var action = 'buscar_paciente';
+
+        var caracteres = buscar.length;
+
+        if(caracteres >= 3){
+
+            $.ajax({
+                url: 'ajax.php',
+                type: 'POST',
+                async: true,
+                data:{action:action, buscar:buscar},
+
+                success: function(response){
+                     
+                    if (response != '') {
+                    
+                        var info = JSON.parse(response);
+                    
+                        $('#listado_pacientes_lista').html('');
+                        $('#listado_pacientes_lista').html(info);       
+                    }         
+                }, 
+            }); 
+        }
         
-        var action='actualizar_datos_cuenta';
-        var id_usuario = $('#id_usuario').val();
-        var usuario_cuenta = $('#usuario_cuenta_prof').val();
-        var clave_cuenta = $('#clave_cuenta_prof').val();
-
-        $.ajax({
-            url: 'ajax.php',
-            type: 'POST',
-            async: true,
-            data: {action:action, id_usuario:id_usuario,usuario_cuenta:usuario_cuenta,clave_cuenta:clave_cuenta},
-
-            success: function(response){                
-                if (response != 'error') 
-                {                 
-                 alert(response);
-                }
-            },
-        });         
+        
+       /*
+    */    
 
     });
 
-    $('#form_datos_pers_prof').submit(function(e) {
+
+    $('#form_add_paciente').submit(function(e) {
         /* Act on the event */
         e.preventDefault(); 
        
@@ -34,19 +46,108 @@ $(document).ready(function(){
             url: 'ajax.php',
             type: 'POST',
             async: true,
-            data: $('#form_datos_pers_prof').serialize(),
+            data: $('#form_add_paciente').serialize(),
 
             success: function(response){
                 if (response != 'error') 
-                {                 
-                 alert(response);                  
+                {   
+                    
+
+                    //bloqueo de campos
+                    $('#nombre_pac').attr('disabled','disabled');
+                    $('#apellido_pac').attr('disabled','disabled');
+                    $('#dni_pac').attr('disabled','disabled');
+                    $('#fecha_nac_pac').attr('disabled','disabled');
+                    $('#sexo_pac').attr('disabled','disabled');
+                    $('#correo_pac').attr('disabled','disabled');
+                    $('#telefono_pac').attr('disabled','disabled');
+                    $('#direccion_pac').attr('disabled','disabled');
+                    
+                    // OCULTAR BOTON GUARDAR     
+                    $('#guardar_nuevo_pac').slideUp(); 
+                    
+                    listado_pacientes();
+                    // notificacion                   
+                    alert(response);
+                    
                 }
             }, 
         });               
 
     });
 
+     
+});// FIN FUNCION READY //////////////////////////////////////////////////////////// 
+
+// BLOQUE DE FUNCIONES 
+
+function modal_add_paciente(){
+    var modal = 'modal_add_paciente';
+    
+    $.ajax({
+        url: 'ajax.php',
+        type: 'POST',
+        async: true,
+        data: { action: modal},    
+        
+        success: function (response) {
+
+            if (response != '') {
+                
+                var info = JSON.parse(response);
+               
+                $('#cuerpo_modal').html('');
+                $('#cuerpo_modal').html(info);
+                
+
+            } 
+        },
+    });
+}
+
+function listado_pacientes(){
+
+    var action = 'lista_pacientes';
+    $.ajax({
+        url: 'ajax.php',
+        type: 'POST',
+        async: true,
+        data: { action: action},    
+        
+        success: function (response) {
+
+            if (response != '') {
+                
+                var info = JSON.parse(response);
+               
+                $('#listado_pacientes_lista').html('');
+                $('#listado_pacientes_lista').html(info);
+                
+
+            } 
+        },
+    });
+}
 
 
- // FIN FUNCION READY      
-});
+
+function limpiar_modal_add_paciente(){    
+    $('#nombre_pac').removeAttr('disabled');
+    $('#apellido_pac').removeAttr('disabled');
+    $('#dni_pac').removeAttr('disabled');
+    $('#fecha_nac_pac').removeAttr('disabled');
+    $('#sexo_pac').removeAttr('disabled');
+    $('#correo_pac').removeAttr('disabled');
+    $('#telefono_pac').removeAttr('disabled');
+    $('#direccion_pac').removeAttr('disabled');
+
+    $('#nombre_pac').val('');
+    $('#apellido_pac').val('');
+    $('#dni_pac').val('');
+    $('#fecha_nac_pac').val('');
+    $('#sexo_pac').val('');
+    $('#correo_pac').val('');
+    $('#telefono_pac').val('');
+    $('#direccion_pac').val('');
+    $('#guardar_nuevo_pac').slideDown();
+}

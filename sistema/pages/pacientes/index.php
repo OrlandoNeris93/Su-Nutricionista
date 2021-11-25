@@ -11,26 +11,7 @@
         
     }else{ // si exite variable de session, hara lo siguente 
          
-        
-        // con el id de usuario, se extraen los datos del profesional
-        $id_usuario =  $_SESSION['id_usuario']; 
-        $query_info = mysqli_query($conn,"CALL consulta_info_profesional('$id_usuario');");
-        $resultado = mysqli_fetch_assoc($query_info);
-
-        // luego se almanena la informacion en variables locales. para imprimir en los campos que corresponden
-        $usuario = $resultado['usuario'];
-        $clave = $resultado['clave'];
-        $nombre = $resultado['nombre'];
-        $apellido = $resultado['apellido'];
-        $direccion = $resultado['direccion'];
-        $telefono = $resultado['telefono'];
-        $dni = $resultado['dni'];
-        $correo = $resultado['correo'];
-        $matricula = $resultado['matricula'];
-        $titulo = $resultado['titulo'];
-
-        //echo $usuario.'  '.$clave.'  '.$nombre.'  '.$apellido.'  '.$direccion.'  '.$telefono.'  '.$dni.'  '.$correo.'  '.$matricula.'  '.$titulo; exit;
-    }    
+         }    
     
 ?>  
 
@@ -95,10 +76,10 @@
                                 <a href="../index.php" class="active"><i class="fa fa-home fa-fw"></i> Principal</a>
                             </li>                            
                             <li>
-                                <a href="../perfil.php"><i class="fa fa-user fa-fw"></i> Perfil</a>
+                                <a href="../profesional/"><i class="fa fa-user fa-fw"></i> Perfil</a>
                             </li>
                             <li>
-                                <a href="../pacientes.php"><i class="fa fa-users fa-fw"></i> Pacientes</a>
+                                <a href="#"><i class="fa fa-users fa-fw"></i> Pacientes</a>
                             </li>
                             <li>
                                 <a href="#"><i class="fa fa-table fa-fw"></i> Recetas</a>
@@ -116,94 +97,64 @@
             </nav>
             <!-- Page Content -->
             <div id="page-wrapper">
-                <div class="container-fluid">
+            <div class="container-fluid">
                     <div class="row">
                         <div class="col-lg-12">
-                            <h1 class="page-header"><i class="fa fa-user fa-fw fa-x4"></i> Perfil del Profesional </h1>
+                            <h1 class="page-header bold h1"><i class="fa fa-users fa-fw"></i> Pacientes</h1>
                         </div>
                         <!-- /.col-lg-12 -->
                     </div>
-                    <!-- /.row -->
-                </div>
-                <div class="row">
-                        <div class="col-lg-12">
-                            <div class="panel panel-default">
-                                <div class="panel-heading h2 bold"> <i class="fa fa-user fa-fw "></i> Datos de la Cuenta </div>
-                                <div class="panel-body">
-                                    <div class="row">
-                                        <div class="col-lg-12">
-                                            
-                                            <form role="form" id="form_datos_cuenta_prof">
-                                                <div class="form-group col-lg-5">
-                                                <input type="hidden"  id="id_usuario"value="<?php echo $id_usuario; ?>">
-                                                    <label>Usuario</label>
-                                                    <input class="form-control"  id="usuario_cuenta_prof"value="<?php echo $usuario; ?>"  pattern="[A-Za-z0-9_-]{1,15}" title="No se Pueden utilizar caracteres especiales (! + * < > ? ¿ @ )" required>
-                                                </div>                                                
-                                                <div class="form-group col-lg-5">
-                                                    <label>Contraseña</label>
-                                                    <input type="text"  id="clave_cuenta_prof"class="form-control" value="<?php echo $clave; ?>" pattern="[A-Za-z0-9_-]{1,15}" title="No se Pueden utilizar caracteres especiales (! + * < > ? ¿ @ )" required>
+                    <!-- formulario busqueda -->
+                    <div class="row">
+                       <div class="col-lg-12">
+                        <div class="panel panel-default">                            
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <form role="form">
+                                            <div class="form-group col-lg-6 ">
+                                                <div class="form-group input-group">                                                    
+                                                    <span class="input-group-btn">
+                                                        <button class="btn btn-default" type="button" disabled><i class="fa fa-search fa-2x"></i>
+                                                        </button>
+                                                    </span>
+                                                    <input type="text" class="form-control" id="buscar_paciente" style="height: 43px;" placeholder="Buscar Paciente.. ">
                                                 </div>
-                                                <div class="form-group col-lg-5">
-                                                    <label></label>
-                                                    <button type="submit" id="actualizar_datos_cuenta_prof" class="btn btn-outline btn-success btn-lg">                                                        
-                                                        <font style="vertical-align: inherit;"><i class="fa fa-refresh fa-fw"></i> Actualizar Datos</font>
-                                                    </button>
-                                                </div>  
-                                            </form>
-                                        </div>
+                                            </div>                                                
+                                            <div class="form-group col-lg-6">
+                                                <!-- Button to trigger modal -->
+                                                <button type="button" class="btn btn-outline btn-primary btn-lg btn-block" data-toggle="modal" data-target="#modal_add_paciente">
+                                                    <i class="fa fa-user-plus "></i>  Añadir Paciente
+                                                </button>
+                                            </div>  
+                                        </form>
                                     </div>
                                 </div>
                             </div>
+                        </div> 
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-12">
                             <div class="panel panel-default">
-                                <div class="panel-heading h2 bold"> Datos Personales </div>
+                                <div class="panel-heading h3"> Lista de Pacientes</div>
+                                <!-- /.panel-heading -->
                                 <div class="panel-body">
-                                    <div class="row">
-                                        <form role="form" id="form_datos_pers_prof">
-                                            <input type="hidden"   name="action" value="actualizar_datos_profesional">
-                                            <input type="hidden"   name= "id_usuario" value="<?php echo $id_usuario; ?>">
-                                            <div class="form-group col-lg-6">
-                                                <label>Nombre/es</label>
-                                                <input class="form-control" name="nombre_prof" value="<?php echo $nombre; ?>" required>
-                                            </div>                                                
-                                            <div class="form-group col-lg-6">
-                                                <label>Apellido/s</label>
-                                                <input  class="form-control" name="apellido_prof" value="<?php echo $apellido; ?>" required>
-                                            </div>
-                                            <div class="form-group col-lg-6">
-                                                <label>DNI</label>
-                                                <input type="text" class="form-control" name="dni_prof" value="<?php echo $dni; ?>"  required>
-                                            </div>
-                                            <div class="form-group col-lg-6">
-                                                <label>Correo</label>
-                                                <input type="email" class="form-control" name="correo_prof" value="<?php echo $correo; ?>" required >
-                                            </div>
+                                    <div class="table-responsive">
+                                        <table class="table table-striped table-bordered table-hover" id="listado_pacientes" >
+                                            <thead>
+                                                <tr>                                                    
+                                                    <th>Apellido/s</th>
+                                                    <th colspan="2">Nombre/s</th>
+                                                    <th>DNI</th>
+                                                    <th >Acciones</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="listado_pacientes_lista">
 
-                                            <div class="form-group col-lg-6">
-                                                <label>Telefono</label>
-                                                <input type="text" class="form-control" name="telefono_prof"  value="<?php echo $telefono; ?>" pattern="[0-9]{1,15}" title="Numero Completo sin 15, espacios o guiones" required >
-                                            </div>
-                                            <div class="form-group col-lg-6">
-                                                <label>Direccion</label>
-                                                <input type="text" class="form-control" name="direccion_prof"  value="<?php echo $direccion; ?>"  required >
-                                            </div>
-                                            <div class="form-group col-lg-6">
-                                                <label>Matricula Profesional</label>
-                                                <input number="text" class="form-control" name="matricula_prof" value="<?php echo $matricula; ?>"  pattern="[0-9]{1,10}" title="Solo se admiten NUMEROS." required >
-                                            </div>
-                                            <div class="form-group col-lg-6">
-                                                <label>Titulo </label>
-                                                <input type="text" class="form-control" name="titulo_prof"  value="<?php echo $titulo; ?>"  required >
-                                            </div>
-                                            <div class="form-group col-lg-6 justify-content-center align-items-center">
-                                                <button type="submit" id="actualizar_datos_personales" class="btn btn-outline btn-success btn-lg">
-                                                    <font style="vertical-align: inherit;"></font>
-                                                    <font style="vertical-align: inherit;"><i class="fa fa-refresh fa-fw"></i> Actualizar Datos</font>
-                                                </button>
-                                            </div>                                            
-
-                                        </form>
-                                    </div>
-                                    <!-- /.row (nested) -->
+                                            </tbody>
+                                        </table>
+                                    </div>          
                                 </div>
                                 <!-- /.panel-body -->
                             </div>
@@ -211,13 +162,15 @@
                         </div>
                         <!-- /.col-lg-12 -->
                     </div>
-             
+                    <!-- /.row -->                   
+                </div>
+               
                     <!-- /.container-fluid -->
             </div>
+
             <!-- /#page-wrapper -->
 
-
-
+            <!-- /#page-wrapper -->
         </div>
         <!-- /#wrapper -->
 
@@ -234,6 +187,89 @@
         <script src="../../js/startmin.js"></script>
 
         <script src="functions.js"></script>
+
+        <script>listado_pacientes();</script>
+
+
+
+
+        <!-- modal add Paciente --> 
+            <!-- Button trigger modal -->
+                <!-- Modal -->
+                <div class="modal fade" id="modal_add_paciente" tabindex="-1" role="dialog" aria-labelledby="modal_add_paciente" aria-hidden="true">
+                <div style="width:50%;" class="modal-dialog" role="document">
+                    <div class="modal-content col-lg-9">
+                    <div class="modal-header">
+                        <h5 class="modal-title h1" id="titulo_modal"><i class="fa fa-user-plus fa-fw"></i> Añadir Paciente</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">                       
+                            <div class="panel panel-default">
+                                <div class="panel-heading h2 bold"> Datos Personales </div>
+                                <div class="panel-body">
+                                    <div class="row">
+                                        <form role="form" id="form_add_paciente">
+                                            <input type="hidden" name="action" value="add_paciente" >
+                                            <div class="form-group col-lg-6">
+                                                <label>Nombre/es</label>
+                                                <input class="form-control" id="nombre_pac"  name="nombre_pac"  placeholder="Nombre del Paciente" required>
+                                            </div>                                                
+                                            <div class="form-group col-lg-6">
+                                                <label>Apellido/s</label>
+                                                <input  class="form-control"  id="apellido_pac"  name="apellido_pac" placeholder="Apellido del Paciente" required>
+                                            </div>
+                                            <div class="form-group col-lg-6">
+                                                <label>D.N.I.</label>
+                                                <input type="text" class="form-control"  id="dni_pac" name="dni_pac" placeholder="DNI del Paciente"  pattern="[0-9]{1,10}" title="Solo se permiten NUMEROS!" required>
+                                            </div>     
+
+                                            <div class="form-group col-lg-6">
+                                                <label>Fecha de Nac</label>
+                                                <input type="date" class="form-control" id="fecha_nac_pac" name="fecha_nac_pac" required >
+                                            </div>
+
+                                            <div class="form-group col-lg-6">
+                                                <label>Sexo</label>
+                                                <select name="sexo_pac"  id="sexo_pac"  class="form-control">
+                                                    <option value="M">Masculino</option>
+                                                    <option value="F">Femenino</option>
+                                                </select>                                                
+                                            </div>
+
+                                            <div class="form-group col-lg-6">
+                                                <label>Correo Electronico</label>
+                                                <input type="email" class="form-control"  id="correo_pac"   name="correo_pac" placeholder="Correo Electronico Paciente" required >
+                                            </div>
+
+                                            <div class="form-group col-lg-6">
+                                                <label>Telefono</label>
+                                                <input type="text" class="form-control"   id="telefono_pac" name="telefono_pac" placeholder="Numero sin 15 ni espacios " pattern="[0-9]{1,15}" title="Numero Completo sin 15, espacios o guiones" required >
+                                            </div>
+                                            <div class="form-group col-lg-6">
+                                                <label>Direccion</label>
+                                                <input type="text" class="form-control"  id="direccion_pac" name="direccion_pac" placeholder="Direccion del Paciente"  required >
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" onclick="limpiar_modal_add_paciente();" data-dismiss="modal">Cerrar</button>
+                                                <button type="submit" id="guardar_nuevo_pac" class="btn btn-primary ">Guardar</button>
+                                            </div>                                            
+                                        </form>
+                                    </div>
+                                    <!-- /.row (nested) -->
+                                </div>
+                                <!-- /.panel-body -->
+                            </div>                    
+                    </div>
+                </div>
+        <!-- fin modal add Paciente --> 
+
+        
+        <!-- modal editar Paciente --> 
+            
+
+        <!-- fin modal editar Paciente --> 
 
     </body>
 </html>
