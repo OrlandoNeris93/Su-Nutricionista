@@ -81,29 +81,6 @@ $(document).ready(function(){
 
 // BLOQUE DE FUNCIONES 
 
-function modal_add_paciente(){
-    var modal = 'modal_add_paciente';
-    
-    $.ajax({
-        url: 'ajax.php',
-        type: 'POST',
-        async: true,
-        data: { action: modal},    
-        
-        success: function (response) {
-
-            if (response != '') {
-                
-                var info = JSON.parse(response);
-               
-                $('#cuerpo_modal').html('');
-                $('#cuerpo_modal').html(info);
-                
-
-            } 
-        },
-    });
-}
 
 function listado_pacientes(){
 

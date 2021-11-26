@@ -93,9 +93,111 @@
                     <!-- /.container-fluid -->
             </div>
 
-            <!-- /#page-wrapper -->
+        <!-- /#page-wrapper -->
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal_add_paciente">
+            Launch demo modal
+            </button>
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal_editar">
+            Launch demo modal
+            </button>
 
+        <!-- modal add Paciente --> 
+            <!-- Button trigger modal -->
+                <!-- Modal -->
+                <div class="modal fade" id="modal_add_paciente" tabindex="-1" role="dialog" aria-labelledby="modal_add_paciente" aria-hidden="true">
+                <div style="width:50%;" class="modal-dialog" role="document">
+                    <div class="modal-content col-lg-9">
+                    <div class="modal-header">
+                        <h5 class="modal-title h1" id="titulo_modal"><i class="fa fa-user-plus fa-fw"></i> Añadir Paciente</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">                       
+                            <div class="panel panel-default">
+                                <div class="panel-heading h2 bold"> Datos Personales </div>
+                                <div class="panel-body">
+                                    <div class="row">
+                                        <form role="form" id="form_add_paciente">
+                                            <input type="hidden" name="action" value="add_paciente" >
+                                            <div class="form-group col-lg-6">
+                                                <label>Nombre/es</label>
+                                                <input class="form-control" id="nombre_pac"  name="nombre_pac"  placeholder="Nombre del Paciente" required>
+                                            </div>                                                
+                                            <div class="form-group col-lg-6">
+                                                <label>Apellido/s</label>
+                                                <input  class="form-control"  id="apellido_pac"  name="apellido_pac" placeholder="Apellido del Paciente" required>
+                                            </div>
+                                            <div class="form-group col-lg-6">
+                                                <label>D.N.I.</label>
+                                                <input type="text" class="form-control"  id="dni_pac" name="dni_pac" placeholder="DNI del Paciente"  pattern="[0-9]{1,10}" title="Solo se permiten NUMEROS!" required>
+                                            </div>     
 
+                                            <div class="form-group col-lg-6">
+                                                <label>Fecha de Nac</label>
+                                                <input type="date" class="form-control" id="fecha_nac_pac" name="fecha_nac_pac" required >
+                                            </div>
+
+                                            <div class="form-group col-lg-6">
+                                                <label>Sexo</label>
+                                                <select name="sexo_pac"  id="sexo_pac"  class="form-control">
+                                                    <option value="M">Masculino</option>
+                                                    <option value="F">Femenino</option>
+                                                </select>                                                
+                                            </div>
+
+                                            <div class="form-group col-lg-6">
+                                                <label>Correo Electronico</label>
+                                                <input type="email" class="form-control"  id="correo_pac"   name="correo_pac" placeholder="Correo Electronico Paciente" required >
+                                            </div>
+
+                                            <div class="form-group col-lg-6">
+                                                <label>Telefono</label>
+                                                <input type="text" class="form-control"   id="telefono_pac" name="telefono_pac" placeholder="Numero sin 15 ni espacios " pattern="[0-9]{1,15}" title="Numero Completo sin 15, espacios o guiones" required >
+                                            </div>
+                                            <div class="form-group col-lg-6">
+                                                <label>Direccion</label>
+                                                <input type="text" class="form-control"  id="direccion_pac" name="direccion_pac" placeholder="Direccion del Paciente"  required >
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" onclick="limpiar_modal_add_paciente();" data-dismiss="modal">Cerrar</button>
+                                                <button type="submit" id="guardar_nuevo_pac" class="btn btn-primary ">Guardar</button>
+                                            </div>                                            
+                                        </form>
+                                    </div>
+                                    <!-- /.row (nested) -->
+                                </div>
+                                <!-- /.panel-body -->
+                            </div>                    
+                    </div>
+                </div>
+        <!-- fin modal add Paciente --> 
+        
+        <!-- modal editar Paciente --> 
+            <div id="modal_editar_paciente">
+                    <!-- Modal -->
+                    <div class="modal fade" id="modal_editar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            ...
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary">Save changes</button>
+                        </div>
+                        </div>
+                    </div>
+                    </div>
+            </div>
+
+        <!-- fin modal editar Paciente --> 
 
         </div>
         <!-- /#wrapper -->
@@ -113,6 +215,9 @@
         <script src="../js/startmin.js"></script>
 
         <script src="functions.js"></script>
+        <script>            
 
+        
+        </script>
     </body>
 </html>

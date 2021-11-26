@@ -141,12 +141,12 @@
                                                 </div>                                                
                                                 <div class="form-group col-lg-5">
                                                     <label>Contraseña</label>
-                                                    <input type="text"  id="clave_cuenta_prof"class="form-control" value="<?php echo $clave; ?>" pattern="[A-Za-z0-9_-]{1,15}" title="No se Pueden utilizar caracteres especiales (! + * < > ? ¿ @ )" required>
+                                                    <input type="password"  id="clave_cuenta_prof"class="form-control" value="<?php echo $clave; ?>" pattern="[A-Za-z0-9_-]{1,15}" title="No se Pueden utilizar caracteres especiales (! + * < > ? ¿ @ )" required>
                                                 </div>
                                                 <div class="form-group col-lg-5">
                                                     <label></label>
-                                                    <button type="submit" id="actualizar_datos_cuenta_prof" class="btn btn-outline btn-success btn-lg">                                                        
-                                                        <font style="vertical-align: inherit;"><i class="fa fa-refresh fa-fw"></i> Actualizar Datos</font>
+                                                    <button type="submit" id="actualizar_datos_cuenta_prof" class="btn btn-outline btn-primary btn-lg">                                                        
+                                                        <font style="vertical-align: inherit;"><i class="fa fa-save fa-fw"></i> Guardar Datos</font>
                                                     </button>
                                                 </div>  
                                             </form>
@@ -195,9 +195,9 @@
                                                 <input type="text" class="form-control" name="titulo_prof"  value="<?php echo $titulo; ?>"  required >
                                             </div>
                                             <div class="form-group col-lg-6 justify-content-center align-items-center">
-                                                <button type="submit" id="actualizar_datos_personales" class="btn btn-outline btn-success btn-lg">
+                                                <button type="submit" id="actualizar_datos_personales" class="btn btn-outline btn-primary btn-lg">
                                                     <font style="vertical-align: inherit;"></font>
-                                                    <font style="vertical-align: inherit;"><i class="fa fa-refresh fa-fw"></i> Actualizar Datos</font>
+                                                    <font style="vertical-align: inherit;"><i class="fa fa-save fa-fw"></i> Guardar Datos</font>
                                                 </button>
                                             </div>                                            
 

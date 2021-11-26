@@ -103,6 +103,7 @@
                             <h1 class="page-header bold h1"><i class="fa fa-users fa-fw"></i> Pacientes</h1>
                         </div>
                         <!-- /.col-lg-12 -->
+                        
                     </div>
                     <!-- formulario busqueda -->
                     <div class="row">
@@ -265,11 +266,6 @@
                 </div>
         <!-- fin modal add Paciente --> 
 
-        
-        <!-- modal editar Paciente --> 
-            
-
-        <!-- fin modal editar Paciente --> 
 
     </body>
 </html>
