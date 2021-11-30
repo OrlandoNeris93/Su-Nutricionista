@@ -37,11 +37,11 @@ $(document).ready(function(){
 
     });
 
-
+    
     $('#form_add_paciente').submit(function(e) {
         /* Act on the event */
         e.preventDefault(); 
-       
+        
         $.ajax({
             url: 'ajax.php',
             type: 'POST',
@@ -49,10 +49,14 @@ $(document).ready(function(){
             data: $('#form_add_paciente').serialize(),
 
             success: function(response){
+
+                console.log(response);
+
+                
                 if (response != 'error') 
                 {   
-                    
-
+                    var info = JSON.parse(response);
+                    console.log(info);
                     //bloqueo de campos
                     $('#nombre_pac').attr('disabled','disabled');
                     $('#apellido_pac').attr('disabled','disabled');
@@ -62,15 +66,18 @@ $(document).ready(function(){
                     $('#correo_pac').attr('disabled','disabled');
                     $('#telefono_pac').attr('disabled','disabled');
                     $('#direccion_pac').attr('disabled','disabled');
+                    $('#hijos_pac').attr('disabled','disabled');
+
+                    $('#id_usuario').val(info.id_user);
                     
                     // OCULTAR BOTON GUARDAR     
                     $('#guardar_nuevo_pac').slideUp(); 
                     
                     listado_pacientes();
                     // notificacion                   
-                    alert(response);
+                    alert('Paciente Guardado Exitosamente! ');
                     
-                }
+                } 
             }, 
         });               
 
@@ -79,7 +86,6 @@ $(document).ready(function(){
      
 });// FIN FUNCION READY //////////////////////////////////////////////////////////// 
 
-// BLOQUE DE FUNCIONES 
 
 
 function listado_pacientes(){
@@ -105,26 +111,5 @@ function listado_pacientes(){
         },
     });
 }
+// BLOQUE DE FUNCIONES 
 
-
-
-function limpiar_modal_add_paciente(){    
-    $('#nombre_pac').removeAttr('disabled');
-    $('#apellido_pac').removeAttr('disabled');
-    $('#dni_pac').removeAttr('disabled');
-    $('#fecha_nac_pac').removeAttr('disabled');
-    $('#sexo_pac').removeAttr('disabled');
-    $('#correo_pac').removeAttr('disabled');
-    $('#telefono_pac').removeAttr('disabled');
-    $('#direccion_pac').removeAttr('disabled');
-
-    $('#nombre_pac').val('');
-    $('#apellido_pac').val('');
-    $('#dni_pac').val('');
-    $('#fecha_nac_pac').val('');
-    $('#sexo_pac').val('');
-    $('#correo_pac').val('');
-    $('#telefono_pac').val('');
-    $('#direccion_pac').val('');
-    $('#guardar_nuevo_pac').slideDown();
-}

@@ -71,7 +71,7 @@
             <!-- Navigation -->
             <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
                 <div class="navbar-header">
-                    <a class="navbar-brand" href="index.html">Su Nutri</a>
+                    <a class="navbar-brand" href="../">Su Nutri</a>
                 </div>
 
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -99,6 +99,9 @@
                             </li>
                             <li>
                                 <a href="../pacientes/"><i class="fa fa-users fa-fw"></i> Pacientes</a>
+                            </li>
+                            <li>
+                                <a href="../planes_nutricionales/"><i class="fa fa-book fa-fw"></i> Nuevo Plan</a>
                             </li>
                             <li>
                                 <a href="#"><i class="fa fa-table fa-fw"></i> Recetas</a>

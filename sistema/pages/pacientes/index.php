@@ -52,7 +52,7 @@
             <!-- Navigation -->
             <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
                 <div class="navbar-header">
-                    <a class="navbar-brand" href="index.html">Su Nutri</a>
+                    <a class="navbar-brand" href="../">Su Nutri</a>
                 </div>
 
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -82,7 +82,7 @@
                                 <a href="#"><i class="fa fa-users fa-fw"></i> Pacientes</a>
                             </li>
                             <li>
-                                <a href="#"><i class="fa fa-table fa-fw"></i> Recetas</a>
+                                <a href="../planes_nutricionales/"><i class="fa fa-book fa-fw"></i> Nuevo Plan</a>
                             </li>
                             <li>
                                 <a href="#"><i class="fa fa-cubes fa-fw"></i> Ingredientes</a>
@@ -251,6 +251,10 @@
                                             <div class="form-group col-lg-6">
                                                 <label>Direccion</label>
                                                 <input type="text" class="form-control"  id="direccion_pac" name="direccion_pac" placeholder="Direccion del Paciente"  required >
+                                            </div>
+                                            <div class="form-group col-lg-6">
+                                                <label>Cuantos hijos tiene?</label>
+                                                <input type="number" class="form-control"  id="hijos_pac" name="hijos_pac" placeholder="Direccion del Paciente"  required >
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary" onclick="limpiar_modal_add_paciente();" data-dismiss="modal">Cerrar</button>

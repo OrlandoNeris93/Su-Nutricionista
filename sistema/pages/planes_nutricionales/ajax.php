@@ -4,6 +4,50 @@ require_once('../../../conexion.php');
 
 if (!empty($_POST)){
 
+    
+    if ($_POST['action'] == 'guardar_antropometria') 
+    {
+        $c_cadera_pac;
+        //echo json_encode($_POST,JSON_UNESCAPED_UNICODE ); exit;
+        if($_POST["c_cadera_pac"] != "")
+        {
+            $c_cadera_pac = $_POST["c_cadera_pac"];
+        }else{
+            $c_cadera_pac = 0;
+        }    
+
+        $c_cintura_pac = $_POST["c_cintura_pac"];
+        $clasif_cintura_pac = $_POST["clasif_cintura_pac"];
+        $clasif_g_visceral = $_POST["clasif_g_visceral"];
+        $clasif_imc_pac = $_POST["clasif_imc_pac"];
+        $clasif_masa_grasa = $_POST["clasif_masa_grasa"];
+        $clasif_masa_musc = $_POST["clasif_masa_musc"];
+        $diagnostico_pac = $_POST["diagnostico_pac"];
+        $edad_actual = $_POST["edad_actual"];        
+        $g_visceral_pac = $_POST["g_visceral_pac"];
+        $id_paciente = $_POST["id_paciente"];
+        $imc_pac = $_POST["imc_pac"];
+        $masa_grasa_pac = $_POST["masa_grasa_pac"];
+        $masa_musc_pac = $_POST["masa_musc_pac"];
+        $peso_pac = $_POST["peso_pac"];
+        $talla_pac = $_POST["talla_pac"];
+        
+        $fecha_consulta = $_POST["fecha_consulta"];
+        $timestamp = strtotime($fecha_consulta); 
+        $fecha_consulta= date("Y-m-d", $timestamp );
+        
+        $query_insert = mysqli_query($conn,"CALL add_consulta('$fecha_consulta',$c_cintura_pac,'$clasif_cintura_pac',$c_cadera_pac,$peso_pac,
+                                                              '$clasif_g_visceral','$clasif_imc_pac','$clasif_masa_grasa','$clasif_masa_musc',
+                                                              '$diagnostico_pac',$edad_actual,$g_visceral_pac,$imc_pac,$masa_grasa_pac,
+                                                              $masa_musc_pac,$talla_pac,$id_paciente);");
+        
+        if($query_insert){
+            echo "Consulta Guardada con Exito! ";
+        }else{
+            echo "Error al Guardar los Datos!";            
+        }
+        mysqli_close($conn); 
+    }
     // ACTUALIZAR PERSONALES DEL PROFESIONAL.
     if ($_POST['action'] == 'add_paciente') 
     {   
@@ -34,6 +78,7 @@ if (!empty($_POST)){
         }
         mysqli_close($conn); 
     }
+
     if ($_POST['action'] == 'lista_pacientes') 
     {            
         $query_listado_pacientes = mysqli_query($conn,"CALL lista_pacientes();");
@@ -51,8 +96,7 @@ if (!empty($_POST)){
                                      <td colspan="2">'.$datos['nombre'].'</td>
                                      <td>'.$datos['dni'].'</td>                                                                 
                                      <td class="center">      
-                                        <button type="button" class="btn btn-outline btn-warning" value="'.$datos['id_usuario'].'"<i class="fa fa-edit"></i> Editar</button>
-                                        <button type="button" class="btn btn-outline btn-danger" value="'.$datos['id_usuario'].'" ><i class="fa fa-close"></i> Eliminar</button>
+                                        <button type="button" class="btn btn-outline btn-primary" onclick="añadir_paciente_plan('.$datos['id_usuario'].');"><i class="fa fa-plus"></i></button>
                                     </td>
                                 </tr>';
                                 
@@ -89,9 +133,8 @@ if (!empty($_POST)){
                                      <td>'.$datos['apellido'].'</td>
                                      <td colspan="2">'.$datos['nombre'].'</td>
                                      <td>'.$datos['dni'].'</td>                                                                 
-                                     <td class="center">                                       
-                                        <button type="button" class="btn btn-outline btn-warning" value="'.$datos['id_usuario'].'"<i class="fa fa-edit"></i> Editar</button>
-                                        <button type="button" class="btn btn-outline btn-danger" value="'.$datos['id_usuario'].'" ><i class="fa fa-close"></i> Eliminar</button>
+                                     <td class="center">
+                                     <button type="button" onclick="añadir_paciente_plan('.$datos['id_usuario'].');" class="btn btn-outline btn-primary"><i class="fa fa-plus"></i></button>
                                     </td>
                                 </tr>';
                                 
@@ -105,7 +148,24 @@ if (!empty($_POST)){
             mysqli_close($conn);
         }       
     }
-
+   
+    if ($_POST['action'] == 'info_paciente') 
+    {
+        
+        $id_paciente = $_POST['id_paciente'];
+        $query_info_paciente = mysqli_query($conn,"CALL info_paciente($id_paciente);");
+        
+        if($query_info_paciente)
+        {
+            $info_paciente = mysqli_fetch_assoc($query_info_paciente);
+            echo json_encode($info_paciente, JSON_UNESCAPED_UNICODE);
+        }else{
+            echo "error al buscar los datos ";
+        }
+    
+        mysqli_close($conn);
+   
+    }
     
 }
 ?>
