@@ -110,18 +110,129 @@ $(document).ready(function(){
 
                 alert(response);
                 $('#form_antropometria *').prop('readonly', true); 
-                $('#guardar_antropometria').slideUp();              
+                $('#guardar_antropometria').slideUp();
+                calcular_indices_de_peso();              
             }, 
         });              
 
     });
     
+    
 
+    $('#form_requerimientos_energeticos').submit(function(e) {
+        /* Act on the event */
+        e.preventDefault(); 
+
+        var myform = $('#form_requerimientos_energeticos');
+
+        // Find disabled inputs, and remove the "disabled" attribute
+        var disabled = myform.find(':input:disabled').removeAttr('disabled');
+
+        // serialize the form
+        var formulario_serializado = myform.serialize();
+
+        // re-disabled the set of inputs that you previously enabled
+        disabled.attr('disabled','disabled');
+         
+        $.ajax({
+            url: 'ajax.php',
+            type: 'POST',
+            async: true,
+            data: formulario_serializado,
+              
+            success: function(response){                
+                
+                alert(response);
+                 
+                $('#form_requerimientos_energeticos *').prop('readonly', true); 
+                $('#guardar_req_energeticos').slideUp();
+                $('#lista_indices').prop('disabled', true);
+                $('#factor_actividad').prop('disabled', true);
+                $('#total_cal_plan').prop('disabled', true);
+                
+                
+                        
+            },   
+        });              
+
+    });
      
 });// FIN FUNCION READY //////////////////////////////////////////////////////////// 
 
 // BLOQUE DE FUNCIONES 
 
+function calcular_RED(){
+
+    var f_actividad = $('#factor_actividad').val();
+   
+    var gasto_e_basal = $('#gasto_energetico_basal').val();
+
+
+    if(isNaN(f_actividad)){  // si no es numerico      
+        $('#gasto_e_total').val('');
+    }else{ // si es numerico
+        var factor_actividad = gasto_e_basal * f_actividad;
+        $('#gasto_e_total').val(Math.round( parseInt(gasto_e_basal) + parseInt(factor_actividad)));
+    }
+    
+}
+
+function calcular_gasto_e_basal(){
+
+    var indice_peso = $('#lista_indices').val();
+    var sexo  = $('#sexo_pac').val();
+    
+    var factor_sexo;
+    if(sexo == 'M'){// si es varon
+        factor_sexo = 1;
+    }else{ // si es mujer
+        factor_sexo = 0.95;
+    }
+    
+    var peso;
+    if(indice_peso == 1){
+         peso = $('#peso_ideal').val();
+    }else if(indice_peso == 2){
+         peso = $('#peso_ideal_corregido').val();
+    }else if(indice_peso == 3){
+         peso = $('#peso_actual_RE').val();
+    }else{
+        $('#gasto_energetico_basal').val('');
+    }
+
+    $('#gasto_energetico_basal').val(Math.round(factor_sexo * peso * 24)); 
+
+}
+
+function calcular_indices_de_peso(){
+    
+    var peso_actual = $('#peso_pac').val();
+    var sexo  = $('#sexo_pac').val();
+    var talla_cm  = $('#talla_pac').val();
+
+    $('#peso_actual_RE').val(peso_actual);
+
+    //calculo peso ideal 
+    var aux = (talla_cm - 100);
+    var peso_ideal =  aux - ((aux*10)/100);
+
+    var peso_ideal_corregido = ((peso_actual - peso_ideal) * 0.25) + peso_ideal;
+    
+    peso_ideal = peso_ideal.toFixed(2);
+    $('#peso_ideal').val(peso_ideal);
+    $('#rango_peso_ideal').val((peso_ideal - 5)+' - '+(peso_ideal + 5));
+    $('#peso_ideal_corregido').val(peso_ideal_corregido);
+    
+    if(sexo == 'M') // si es varon
+    {
+        $('#sexo_RE').val('Masculino');
+        
+    }else{ // si es mujer 
+        $('#sexo_RE').val('Femenino');
+    }
+
+
+}
 
 function clasificacion_grasa_v(){
     
@@ -508,6 +619,7 @@ function añadir_paciente_plan(id_paciente){
             $('#direccion_pac').val(info.direccion);
             $('#hijos_pac').val(info.hijos);
             $('#id_usuario').val(id_paciente);
+            $('#id_paciente_red').val(id_paciente);            
             $('#edad_actual').val(info.edad); 
             $('#id_paciente_antropometria').val(info.id_paciente);
             

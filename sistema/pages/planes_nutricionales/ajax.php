@@ -4,6 +4,49 @@ require_once('../../../conexion.php');
 
 if (!empty($_POST)){
 
+    if ($_POST['action'] == 'guardar_req_energeticos') 
+    {       
+       
+
+        $id_profesional = $_POST['id_profesional'];               
+        $peso_actual_RE = $_POST['peso_actual_RE'];
+        $peso_ideal = $_POST['peso_ideal'];
+        $rango_peso_ideal = $_POST['rango_peso_ideal'];
+        $peso_ideal_corregido = $_POST['peso_ideal_corregido'];        
+        $factor_actividad = $_POST['factor_actividad'];
+        $gasto_e_total = $_POST['gasto_e_total'];
+        $gasto_energetico_basal = $_POST['gasto_energetico_basal'];
+        $total_cal_plan = $_POST['total_cal_plan'];
+        
+        $indice_peso;
+        if( $_POST['lista_indices'] == 1){
+           $indice_peso ="Peso Ideal";
+        }else if( $_POST['lista_indices'] == 2){
+            $indice_peso ="Peso Ideal Corregido";
+        }else if( $_POST['lista_indices'] == 3){
+            $indice_peso ="Peso Actual";
+        }
+
+        $id_user_paciente = $_POST['id_paciente_red'];
+        $query_id_paciente = mysqli_query($conn,"SELECT p.id_paciente as id FROM pacientes p WHERE p.id_usuario = $id_user_paciente");
+        $resultado_id = mysqli_fetch_assoc($query_id_paciente);
+        $id_paciente_red =  $resultado_id['id'];
+        
+        //echo $id_profesional.' '.$id_paciente_red.' '. $peso_actual_RE.' '. $peso_ideal.' '.$rango_peso_ideal.' '.$peso_ideal_corregido.' '. $lista_indices.' '. $factor_actividad.' '. $gasto_e_total.' '. $total_cal_plan;
+        
+       
+
+        $query_insert = mysqli_query($conn,"CALL guardar_plan($peso_ideal,'$rango_peso_ideal',$peso_ideal_corregido,'$indice_peso',
+                                                              $gasto_energetico_basal,$factor_actividad,$gasto_e_total,
+                                                              $total_cal_plan,$id_profesional,$id_paciente_red);");
+        
+        if($query_insert){
+            echo "Pan Generado Exitosamente! ";
+        }else{
+            echo "Error al Guardar los Datos!";            
+        }
+        mysqli_close($conn);  /* */
+    }
     
     if ($_POST['action'] == 'guardar_antropometria') 
     {
@@ -48,7 +91,7 @@ if (!empty($_POST)){
         }
         mysqli_close($conn); 
     }
-    // ACTUALIZAR PERSONALES DEL PROFESIONAL.
+    //
     if ($_POST['action'] == 'add_paciente') 
     {   
         // echo json_encode($_POST,JSON_UNESCAPED_UNICODE ); exit;

@@ -3,7 +3,7 @@
     // inclucion de archivo de conexion e inicio de session
     require_once('../../../conexion.php');
     session_start();
-
+    $id_profesional;
     if(empty($_SESSION['estado'])) // si no exite variable de session, destruye la session creada y redirecciona al login. 
     {
         session_destroy();
@@ -11,7 +11,8 @@
         
     }else{ // si exite variable de session, hara lo siguente 
          
-         }    
+        $id_profesional = $_SESSION['id_profesional'];
+    }    
     
 ?>  
 
@@ -300,23 +301,30 @@
                                 <div class="panel-heading h2 bold">Necesidades Energeticas</div>                                
                                 <div class="panel-body">
                                     <div class="row">
-                                        <form id="form_requerimientos_energeticos"  role="form">                                        
+                                        <form id="form_requerimientos_energeticos"  role="form"> 
+                                            <input type="hidden" name="id_profesional" value="<?php echo  $id_profesional; ?>">
+                                            <input type="hidden" name="id_paciente_red" id="id_paciente_red" >
+                                            <input type="hidden" name="action" value="guardar_req_energeticos" >                                       
                                             <div class="panel-body">
                                                 <span class="h2" style = "text-decoration; underline;">Indices de Peso</span><br>
                                                 <label></label>                                                                                            
                                                 <div class="row">
-                                                    <div class="form-group col-lg-3 col-md-3 col-sm-3">
-                                                        <label>Peso Ideal</label>
-                                                        <input type="number"  class="form-control" value="123" required disabled>
+                                                    <div class="form-group col-lg-2 col-md-2 col-sm-2">
+                                                        <label>Peso Actual</label>
+                                                        <input type="number" name="peso_actual_RE" id="peso_actual_RE" class="form-control" required readonly>
+                                                    </div>
+                                                    <div class="form-group col-lg-2 col-md-2 col-sm-2">
+                                                        <label>Peso Ideal </label>
+                                                        <input type="number" name="peso_ideal" id="peso_ideal" class="form-control" value="123" required readonly>
                                                     </div>                                                
-                                                    <div class="form-group col-lg-3 col-md-3 col-sm-3">
+                                                    <div class="form-group col-lg-2 col-md-2 col-sm-2">
                                                         <label>Rango de Peso Ideal</label>
-                                                        <input type="number"  class="form-control" value="123" required disabled>
+                                                        <input type="text" name="rango_peso_ideal" id="rango_peso_ideal"  class="form-control" value="123" required readonly>
                                                     </div> 
                                                 
-                                                    <div class="form-group col-lg-3 col-md-3 col-sm-3">
+                                                    <div class="form-group col-lg-2 col-md-2 col-sm-2">
                                                         <label>Peso Ideal Corregido</label>
-                                                        <input type="number"  class="form-control col-lg-3" placeholder="29" required disabled>
+                                                        <input type="number" name="peso_ideal_corregido" id="peso_ideal_corregido" class="form-control col-lg-3"  required readonly>
                                                     </div>
                                                 </div>                                 
                                             </div>
@@ -327,20 +335,20 @@
                                                 <div class="row">
                                                     <div class="form-group col-lg-3 col-md-3 col-sm-3">
                                                         <label>Sexo</label>
-                                                        <input type="text"  class="form-control" value="Masculino" required disabled>
+                                                        <input type="text" id="sexo_RE" class="form-control"  required readonly>
                                                     </div>                                                
                                                     <div class="form-group col-lg-3 col-md-3 col-sm-3">
                                                         <label>Indice de Peso</label>
-                                                        <select name="" id="" class="form-control">
-                                                            <option value="0">Seleccione Indice..</option>
+                                                        <select name="lista_indices" id="lista_indices" onchange="calcular_gasto_e_basal()" class="form-control" required>
+                                                            <option value="">Seleccione Indice..</option>
                                                             <option value="1">Peso Ideal</option>
                                                             <option value="2">Peso Ideal Corregido</option>
-                                                            <option value="3">Peso Ideal Actual</option>
+                                                            <option value="3">Peso Actual</option>
                                                         </select>
                                                     </div>                                                 
                                                     <div class="form-group col-lg-3 col-md-3 col-sm-3">
                                                         <label>Gasto Energetico Basal</label>
-                                                        <input type="number"  class="form-control col-lg-3" placeholder="29" required disabled>
+                                                        <input type="number" name="gasto_energetico_basal" id="gasto_energetico_basal"  class="form-control col-lg-3"  required disabled>
                                                     </div>
                                                 </div>                                 
                                             </div>  
@@ -351,30 +359,30 @@
                                                 <div class="row">                                                                                                    
                                                     <div class="form-group col-lg-3 col-md-3 col-sm-3">
                                                         <label>Factor de Actividad</label>
-                                                        <select name="" id="" class="form-control">
-                                                            <option value="0">Seleccione Factor..</option>
-                                                            <option value="1">Peso Sedentario</option>
-                                                            <option value="2">Peso Activo </option>
-                                                            <option value="3">Peso Muy Activo</option>
+                                                        <select name="factor_actividad" onchange="calcular_RED();" id="factor_actividad" class="form-control" required>
+                                                            <option value="" >Seleccione Factor..</option>
+                                                            <option value="0.30">Sedentario 30%</option>
+                                                            <option value="0.5">Moderado 50% </option>
+                                                            <option value="0.75">Activo 75%</option>
+                                                            <option value="1">Muy Activo 100%</option>
                                                         </select>
                                                     </div>                                                 
                                                     <div class="form-group col-lg-3 col-md-3 col-sm-3">
                                                         <label>Gasto Energetico Total</label>
-                                                        <input type="number"  class="form-control col-lg-3" placeholder="29" required disabled>
+                                                        <input type="number" name="gasto_e_total" id="gasto_e_total" class="form-control col-lg-3" required readonly>
                                                     </div>
                                                     <div class="form-group col-lg-3 col-md-3 col-sm-3">
                                                         <label>Calorias del Plan</label>
-                                                        <select name="" id="" class="form-control">
-                                                            <option value="0">Seleccione </option>
-                                                            <option value="1">1000</option>
-                                                            <option value="2">1100</option>
-                                                            <option value="3">1200</option>
+                                                        <select name="total_cal_plan" id="total_cal_plan" class="form-control" required>
+                                                            <option value="">Seleccione </option>
+                                                            <option value="1800">1800 Kcal</option>
+                                                            <option value="2200">2200 Kcal</option>                                                            
                                                         </select>
                                                     </div>                                                     
                                                 </div>                                 
                                             </div> 
                                             <div class="panel-body">
-                                                <button type="submit" id="" class="btn btn-primary btn-lg btn-outline"><i class="fa fa-save"></i> Guardar RED</button>                                           
+                                                <button type="submit" id="guardar_req_energeticos"  class="btn btn-primary btn-lg btn-outline"><i class="fa fa-save"></i> Guardar RED</button>                                           
                                             </div>
                                         </form>
                                     </div>
@@ -385,7 +393,7 @@
                             <!-- /.row fin formulario requerimientos energeticos -->
 
                             <!-- /.row inicio formulario tablas sintetica -->
-                            <div class="panel panel-default" > 
+                            <div class="panel panel-default" style="display:none;" > 
                                 <div class="panel-heading h2 bold">Formula Sintetica</div>                                
                                 <div class="panel-body">
                                     <div class="row">                                        
@@ -457,7 +465,7 @@
                             <!-- /.row fin formulario tablas sintetica   -->
                             
                             <!-- /.row inicio formulario tablas desarrollada -->
-                            <div class="panel panel-default" > 
+                            <div class="panel panel-default" style="display:none;" > 
                                 <div class="panel-heading h2 bold">Formula Desarrollada</div>                                
                                 <div class="panel-body">
                                     <div class="row">                                        

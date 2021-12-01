@@ -38,10 +38,12 @@ if(!empty($_SESSION))
         {         
            
           $id_usuario = $result['id_usuario'];
+          $id_profesional = $result['id_profesional'];
 
           // echo $id['id'];       
           $_SESSION['estado']=true;
           $_SESSION['id_usuario'] =  $id_usuario;
+          $_SESSION['id_profesional'] =  $id_profesional;
           
           header('location: sistema/');
 
