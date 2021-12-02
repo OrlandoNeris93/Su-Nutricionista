@@ -41,7 +41,7 @@ if (!empty($_POST)){
                                                               $total_cal_plan,$id_profesional,$id_paciente_red);");
         
         if($query_insert){
-            echo "Pan Generado Exitosamente! ";
+            echo "Plan Generado Exitosamente! Vaya a la Seccion de Pacientes para Imprimirlo! ";
         }else{
             echo "Error al Guardar los Datos!";            
         }

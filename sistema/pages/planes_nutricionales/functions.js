@@ -76,6 +76,8 @@ $(document).ready(function(){
                     listado_pacientes();
                     // notificacion                   
                     alert('Paciente Guardado Exitosamente! ');
+
+                    $('#edad_actual').val(calcular_edad_actual($('#fecha_nac_pac').val()));
                     
                 } 
             }, 
@@ -161,6 +163,19 @@ $(document).ready(function(){
 
 // BLOQUE DE FUNCIONES 
 
+function calcular_edad_actual(fecha){
+   
+    var hoy = new Date();
+    var cumpleanos = new Date(fecha);
+    var edad = hoy.getFullYear() - cumpleanos.getFullYear();
+    var m = hoy.getMonth() - cumpleanos.getMonth();
+    
+    if (m < 0 || (m === 0 && hoy.getDate() < cumpleanos.getDate())) {
+        edad--;
+    }    
+    return edad;    
+}
+
 function calcular_RED(){
 
     var f_actividad = $('#factor_actividad').val();
@@ -220,7 +235,7 @@ function calcular_indices_de_peso(){
     
     peso_ideal = peso_ideal.toFixed(2);
     $('#peso_ideal').val(peso_ideal);
-    $('#rango_peso_ideal').val((peso_ideal - 5)+' - '+(peso_ideal + 5));
+    $('#rango_peso_ideal').val((Math.round(peso_ideal) - 5)+' - '+(Math.round(peso_ideal) + 5));
     $('#peso_ideal_corregido').val(peso_ideal_corregido);
     
     if(sexo == 'M') // si es varon
@@ -635,11 +650,10 @@ function añadir_paciente_plan(id_paciente){
             $('#correo_pac').attr('disabled','disabled');
             $('#telefono_pac').attr('disabled','disabled');
             $('#direccion_pac').attr('disabled','disabled');
-            $('#hijos_pac').attr('disabled','disabled');
-            
-           
-            
+            $('#hijos_pac').attr('disabled','disabled');           
             cerrar_modal_buscar_paciente();
+            edad_actual
+            calcular_edad_actual(fecha)
         }, 
     });
 

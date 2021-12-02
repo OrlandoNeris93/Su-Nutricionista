@@ -197,7 +197,7 @@
                                             </div>
                                             <div class="form-group col-lg-2 col-md-2">
                                                 <label>Peso (KG)</label>
-                                                <input type="number" id="peso_pac"  onchange="calculo_imc()" name="peso_pac" class="form-control" placeholder="87,34" required>
+                                                <input type="number" id="peso_pac" step="000.01" onchange="calculo_imc()" name="peso_pac" class="form-control" placeholder="87,34" required>
                                             </div>
                                             <div class="form-group col-lg-2 col-md-2">
                                                 <label>Talla (CM)</label>
@@ -217,7 +217,7 @@
                                             <div class="form-group col-lg-12 col-md-12">
                                                 <div class="container-fluid col-lg-3 col-md-3">
                                                     <label>Circunferencia de Cintura (CM)</label>
-                                                    <input type="number" id="c_cintura_pac" onchange="clasif_cintura();"  name="c_cintura_pac" class="form-control" value="1245" required>
+                                                    <input type="number" id="c_cintura_pac" onchange="clasif_cintura();"  name="c_cintura_pac" class="form-control" placeholder="80" required>
                                                 </div> 
                                                 <div class="container col-lg-4 col-md-5">
                                                     <label>Riesgo Cardiometabolico</label>
@@ -237,17 +237,17 @@
                                                 <div class="row">
                                                     <div class="form-group col-lg-12 col-md-12">
                                                         <div class="container col-lg-4 col-md-5">
-                                                            <label>% Masa Muscular</label>
-                                                            <input  class="form-control" onchange="clasif_masa_muscular();" id="masa_musc_pac" name="masa_musc_pac" placeholder="21.5" required >                                                    
+                                                            <label>Porcentarje (%) Masa Muscular</label>
+                                                            <input  class="form-control"  onchange="clasif_masa_muscular();" id="masa_musc_pac" name="masa_musc_pac" placeholder="21.5" required >                                                    
                                                         </div>
                                                         <div class="container col-lg-4 col-md-5">
                                                             <label>Clasificacion</label>
-                                                            <input  class="form-control" id="clasif_masa_musc" name="clasif_masa_musc"  required disabled>                                                    
+                                                            <input  class="form-control"  id="clasif_masa_musc" name="clasif_masa_musc"  required disabled>                                                    
                                                         </div>                                                                                                                                
                                                     </div>
                                                     <div class="form-group col-lg-12 col-md-12">
                                                         <div class="container col-lg-4 col-md-5">
-                                                            <label>% Masa Grasa</label>
+                                                            <label>Porcentarje (%) Masa Grasa</label>
                                                             <input  class="form-control" id="masa_grasa_pac" onchange="clasificacion_masa_grasa();" placeholder="21.5" name="masa_grasa_pac" required >                                                    
                                                         </div>
                                                         <div class="container col-lg-4 col-md-5">
@@ -257,7 +257,7 @@
                                                     </div>
                                                     <div class="form-group col-lg-12 col-md-12">
                                                         <div class="container col-lg-4 col-md-5">
-                                                            <label>% Grasa Visceral</label>
+                                                            <label>Porcentarje (%) Grasa Visceral</label>
                                                             <input  class="form-control" id="g_visceral_pac" onchange="clasificacion_grasa_v();" name="g_visceral_pac" placeholder="21.5" required >                                                    
                                                         </div>
                                                         <div class="container col-lg-4 col-md-5">
@@ -267,7 +267,7 @@
                                                     </div>
                                                     <div class="form-group col-lg-12 col-md-12">
                                                         <div class="form-group col-lg-8 col-md-8">
-                                                            <label>Diagnostico  </label>
+                                                            <label>Diagnostico Nutricional </label>
                                                             <textarea class="form-control" type="text" id="diagnostico_pac" maxlength="500" name="diagnostico_pac" placeholder="Observaciones.." cols="30" rows="6" required></textarea>
                                                         </div>
                                                         <div class="form-group col-lg-5 col-md-5">    
@@ -302,11 +302,11 @@
                                                 <div class="row">
                                                     <div class="form-group col-lg-2 col-md-2 col-sm-2">
                                                         <label>Peso Actual</label>
-                                                        <input type="number" name="peso_actual_RE" id="peso_actual_RE" class="form-control" required readonly>
+                                                        <input type="number" step="000.01"  name="peso_actual_RE" id="peso_actual_RE" class="form-control" required readonly>
                                                     </div>
                                                     <div class="form-group col-lg-2 col-md-2 col-sm-2">
                                                         <label>Peso Ideal </label>
-                                                        <input type="number" name="peso_ideal" id="peso_ideal" class="form-control" value="123" required readonly>
+                                                        <input type="number" step="000.01" name="peso_ideal" id="peso_ideal" class="form-control" value="123" required readonly>
                                                     </div>                                                
                                                     <div class="form-group col-lg-2 col-md-2 col-sm-2">
                                                         <label>Rango de Peso Ideal</label>
@@ -315,7 +315,7 @@
                                                 
                                                     <div class="form-group col-lg-2 col-md-2 col-sm-2">
                                                         <label>Peso Ideal Corregido</label>
-                                                        <input type="number" name="peso_ideal_corregido" id="peso_ideal_corregido" class="form-control col-lg-3"  required readonly>
+                                                        <input type="number" step="000.01" name="peso_ideal_corregido" id="peso_ideal_corregido" class="form-control col-lg-3"  required readonly>
                                                     </div>
                                                 </div>                                 
                                             </div>
