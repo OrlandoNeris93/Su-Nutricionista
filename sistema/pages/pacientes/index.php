@@ -84,12 +84,7 @@
                             <li>
                                 <a href="../planes_nutricionales/"><i class="fa fa-book fa-fw"></i> Nuevo Plan</a>
                             </li>
-                            <li>
-                                <a href="#"><i class="fa fa-cubes fa-fw"></i> Ingredientes</a>
-                            </li>
-                            <li>
-                                <a href="#"><i class="fa fa-edit fa-fw"></i> Informes</a>
-                            </li>
+                            
                         </ul>
                     </div>
                 </div>
@@ -124,8 +119,11 @@
                                             </div>                                                
                                             <div class="form-group col-lg-6">
                                                 <!-- Button to trigger modal -->
-                                                <button type="button" class="btn btn-outline btn-primary btn-lg btn-block" data-toggle="modal" data-target="#modal_add_paciente">
+                                                <button type="button" id="mostrar_form_add_pac" class="btn btn-outline btn-primary btn-lg " >
                                                     <i class="fa fa-user-plus "></i>  Añadir Paciente
+                                                </button>
+                                                <button type="button" id="ocultar_form_addPac" style="display:none;" class="btn btn-outline btn-primary btn-lg " >
+                                                    <i class="fa fa-user-plus "></i>  Ocultar 
                                                 </button>
                                             </div>  
                                         </form>
@@ -133,6 +131,78 @@
                                 </div>
                             </div>
                         </div> 
+                    </div>
+
+                     <div class="row">
+                        <div class="col-lg-12">
+                            <div class="panel panel-default" id="panel_add_pac" style="display:none;">
+                                <div class="panel-heading h3"> Añadir Nuevo Paciente </div>
+                                <!-- /.panel-heading -->
+                                <div class="panel-body">
+                                <div class="panel-heading h2 bold"> Datos Personales </div>
+                                <div class="panel-body">
+                                    <div class="row">
+                                        <form role="form" id="form_add_paciente">
+                                            <input type="hidden" name="action" value="add_paciente" >
+                                            <div class="form-group col-lg-4 col-sm-4">
+                                                <label>Nombre/es</label>
+                                                <input class="form-control" id="nombre_pac"  name="nombre_pac"  placeholder="Nombre del Paciente" required>
+                                            </div>                                                
+                                            <div class="form-group col-lg-4 col-sm-4">
+                                                <label>Apellido/s</label>
+                                                <input  class="form-control"  id="apellido_pac"  name="apellido_pac" placeholder="Apellido del Paciente" required>
+                                            </div>
+                                            <div class="form-group col-lg-4 col-sm-4">
+                                                <label>D.N.I.</label>
+                                                <input type="text" class="form-control"  id="dni_pac" name="dni_pac" placeholder="DNI del Paciente"  pattern="[0-9]{1,10}" title="Solo se permiten NUMEROS!" required>
+                                            </div>     
+
+                                            <div class="form-group col-lg-4 col-sm-4">
+                                                <label>Fecha de Nac</label>
+                                                <input type="date" class="form-control" id="fecha_nac_pac" name="fecha_nac_pac" required >
+                                            </div>
+
+                                            <div class="form-group col-lg-4 col-sm-4">
+                                                <label>Sexo</label>
+                                                <select name="sexo_pac"  id="sexo_pac"  class="form-control">
+                                                    <option value="M">Masculino</option>
+                                                    <option value="F">Femenino</option>
+                                                </select>                                                
+                                            </div>
+
+                                            <div class="form-group col-lg-4 col-sm-4">
+                                                <label>Correo Electronico</label>
+                                                <input type="email" class="form-control"  id="correo_pac"   name="correo_pac" placeholder="Correo Electronico Paciente" required >
+                                            </div>
+
+                                            <div class="form-group col-lg-4 col-sm-4">
+                                                <label>Telefono</label>
+                                                <input type="text" class="form-control"   id="telefono_pac" name="telefono_pac" placeholder="Numero sin 15 ni espacios " pattern="[0-9]{1,15}" title="Numero Completo sin 15, espacios o guiones" required >
+                                            </div>
+                                            <div class="form-group col-lg-4 col-sm-4">
+                                                <label>Direccion</label>
+                                                <input type="text" class="form-control"  id="direccion_pac" name="direccion_pac" placeholder="Direccion del Paciente"  required >
+                                            </div>
+                                            <div class="form-group col-lg-4 col-sm-4">
+                                                <label>Cuantos hijos tiene?</label>
+                                                <input type="number" class="form-control"  id="hijos_pac" name="hijos_pac" placeholder="Direccion del Paciente"  required >
+                                            </div>
+                                            <div class="container col-lg-12" >
+                                                <div class="form-group col-lg-4 col-sm-4">
+                                                    <button type="submit" id="guardar_nuevo_pac" class="btn btn-primary btn-lg">Guardar</button>
+                                                </div>                                      
+                                            </div>
+                                                                                        
+                                        </form>
+                                    </div>
+                                    <!-- /.row (nested) -->
+                                </div>          
+                                </div>
+                                <!-- /.panel-body -->
+                            </div>
+                            <!-- /.panel -->
+                        </div>
+                        <!-- /.col-lg-12 -->
                     </div>
 
                     <div class="row">
@@ -194,14 +264,16 @@
 
 
 
-        <!-- modal add Paciente --> 
+        <!-- modal editar Paciente --> 
             <!-- Button trigger modal -->
                 <!-- Modal -->
-                <div class="modal fade" id="modal_add_paciente" tabindex="-1" role="dialog" aria-labelledby="modal_add_paciente" aria-hidden="true">
+
+                
+                <div class="modal fade" id="modal_editar_paciente" tabindex="-1" role="dialog" aria-labelledby="modal_editar_paciente" aria-hidden="true">
                 <div style="width:50%;" class="modal-dialog" role="document">
                     <div class="modal-content col-lg-9">
                     <div class="modal-header">
-                        <h5 class="modal-title h1" id="titulo_modal"><i class="fa fa-user-plus fa-fw"></i> Añadir Paciente</h5>
+                        <h5 class="modal-title h1" id="titulo_modal"><i class="fa fa-edit fa-fw"></i>Editar Paciente</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                         </button>
@@ -211,29 +283,30 @@
                                 <div class="panel-heading h2 bold"> Datos Personales </div>
                                 <div class="panel-body">
                                     <div class="row">
-                                        <form role="form" id="form_add_paciente">
-                                            <input type="hidden" name="action" value="add_paciente" >
+                                        <form role="form" id="form_editar_paciente">
+                                            <input type="hidden" name="action" value="actualizar_datos_pac" >
+                                            <input type="hidden" name="id_usuario_editar" id="id_usuario_editar" value="" >
                                             <div class="form-group col-lg-6">
                                                 <label>Nombre/es</label>
-                                                <input class="form-control" id="nombre_pac"  name="nombre_pac"  placeholder="Nombre del Paciente" required>
+                                                <input class="form-control" id="nombre_pac_editar"  name="nombre_pac_editar"  placeholder="Nombre del Paciente" required>
                                             </div>                                                
                                             <div class="form-group col-lg-6">
                                                 <label>Apellido/s</label>
-                                                <input  class="form-control"  id="apellido_pac"  name="apellido_pac" placeholder="Apellido del Paciente" required>
+                                                <input  class="form-control"  id="apellido_pac_editar"  name="apellido_pac_editar" placeholder="Apellido del Paciente" required>
                                             </div>
                                             <div class="form-group col-lg-6">
                                                 <label>D.N.I.</label>
-                                                <input type="text" class="form-control"  id="dni_pac" name="dni_pac" placeholder="DNI del Paciente"  pattern="[0-9]{1,10}" title="Solo se permiten NUMEROS!" required>
+                                                <input type="text" class="form-control"  id="dni_pac_editar" name="dni_pac_editar" placeholder="DNI del Paciente"  pattern="[0-9]{1,10}" title="Solo se permiten NUMEROS!" required>
                                             </div>     
 
                                             <div class="form-group col-lg-6">
                                                 <label>Fecha de Nac</label>
-                                                <input type="date" class="form-control" id="fecha_nac_pac" name="fecha_nac_pac" required >
+                                                <input type="date" class="form-control" id="fecha_nac_pac_editar" name="fecha_nac_pac_editar" required >
                                             </div>
 
                                             <div class="form-group col-lg-6">
                                                 <label>Sexo</label>
-                                                <select name="sexo_pac"  id="sexo_pac"  class="form-control">
+                                                <select name="sexo_pac_editar"  id="sexo_pac_editar"  class="form-control">
                                                     <option value="M">Masculino</option>
                                                     <option value="F">Femenino</option>
                                                 </select>                                                
@@ -241,25 +314,28 @@
 
                                             <div class="form-group col-lg-6">
                                                 <label>Correo Electronico</label>
-                                                <input type="email" class="form-control"  id="correo_pac"   name="correo_pac" placeholder="Correo Electronico Paciente" required >
+                                                <input type="email" class="form-control"  id="correo_pac_editar"   name="correo_pac_editar" placeholder="Correo Electronico Paciente" required >
                                             </div>
 
                                             <div class="form-group col-lg-6">
                                                 <label>Telefono</label>
-                                                <input type="text" class="form-control"   id="telefono_pac" name="telefono_pac" placeholder="Numero sin 15 ni espacios " pattern="[0-9]{1,15}" title="Numero Completo sin 15, espacios o guiones" required >
+                                                <input type="text" class="form-control"   id="telefono_pac_editar" name="telefono_pac_editar" placeholder="Numero sin 15 ni espacios " pattern="[0-9]{1,15}" title="Numero Completo sin 15, espacios o guiones" required >
                                             </div>
                                             <div class="form-group col-lg-6">
                                                 <label>Direccion</label>
-                                                <input type="text" class="form-control"  id="direccion_pac" name="direccion_pac" placeholder="Direccion del Paciente"  required >
+                                                <input type="text" class="form-control"  id="direccion_pac_editar" name="direccion_pac_editar" placeholder="Direccion del Paciente"  required >
                                             </div>
                                             <div class="form-group col-lg-6">
                                                 <label>Cuantos hijos tiene?</label>
-                                                <input type="number" class="form-control"  id="hijos_pac" name="hijos_pac" placeholder="Direccion del Paciente"  required >
+                                                <input type="number" class="form-control"  id="hijos_pac_editar" name="hijos_pac_editar" placeholder="Direccion del Paciente"  required >
                                             </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary" onclick="limpiar_modal_add_paciente();" data-dismiss="modal">Cerrar</button>
-                                                <button type="submit" id="guardar_nuevo_pac" class="btn btn-primary ">Guardar</button>
-                                            </div>                                            
+                                            <div class="container col-lg-12 col-md-12 col-sm-12">
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" onclick="limpiar_modal_editar_paciente();" data-dismiss="modal">Cerrar</button>
+                                                    <button type="submit" id="acturalizar_datos_pac" class="btn btn-primary ">Guardar Cambios</button>
+                                                </div>
+                                            </div>
+                                                                                        
                                         </form>
                                     </div>
                                     <!-- /.row (nested) -->
@@ -268,8 +344,7 @@
                             </div>                    
                     </div>
                 </div>
-        <!-- fin modal add Paciente --> 
-
+        <!-- fin modal editar Paciente --> 
 
     </body>
 </html>

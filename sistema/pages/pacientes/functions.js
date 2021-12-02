@@ -50,13 +50,10 @@ $(document).ready(function(){
 
             success: function(response){
 
-                console.log(response);
-
-                
                 if (response != 'error') 
                 {   
                     var info = JSON.parse(response);
-                    console.log(info);
+                    //console.log(info);
                     //bloqueo de campos
                     $('#nombre_pac').attr('disabled','disabled');
                     $('#apellido_pac').attr('disabled','disabled');
@@ -76,6 +73,11 @@ $(document).ready(function(){
                     listado_pacientes();
                     // notificacion                   
                     alert('Paciente Guardado Exitosamente! ');
+
+                    $('#panel_add_pac').slideUp();
+                    $('#ocultar_form_addPac').hide();
+                    $('#mostrar_form_add_pac').show();
+                    limpiar_formulario_alta();
                     
                 } 
             }, 
@@ -83,10 +85,93 @@ $(document).ready(function(){
 
     });
 
+    
+
+    $('#form_editar_paciente').submit(function(e) {
+        /* Act on the event */
+        e.preventDefault(); 
+        
+        $.ajax({
+            url: 'ajax.php',
+            type: 'POST',
+            async: true,
+            data: $('#form_editar_paciente').serialize(),
+
+            success: function(response){
+                alert(response);
+                listado_pacientes();
+            }, 
+        });               
+
+    });
+
+    $('#ocultar_form_addPac').click(function(e){
+        $('#panel_add_pac').slideUp();
+        $('#ocultar_form_addPac').hide();
+        $('#mostrar_form_add_pac').show();
+    })
+
+    $('#mostrar_form_add_pac').click(function(e){
+        $('#panel_add_pac').slideDown();
+        $('#ocultar_form_addPac').show();
+        $('#mostrar_form_add_pac').hide();
+        
+    })
      
 });// FIN FUNCION READY //////////////////////////////////////////////////////////// 
 
+// BLOQUE DE FUNCIONES 
+function editar_paciente(id_usuario){
+      
+    action = 'info_paciente';
 
+    $.ajax({
+        url: 'ajax.php',
+        type: 'POST',
+        async: true,
+        data: { action: action, id_usuario:id_usuario},    
+        
+        success: function (response) {
+
+            var info = JSON.parse(response);
+            //console.log(info);
+
+            // mostrar datos en el formulario
+            $('#nombre_pac_editar').val(info.nombre);
+            $('#apellido_pac_editar').val(info.apellido);
+            $('#dni_pac_editar').val(info.dni);
+            $('#fecha_nac_pac_editar').val(info.fecha_nac);
+            $('#sexo_pac_editar').val(info.sexo);
+            $('#correo_pac_editar').val(info.correo);
+            $('#telefono_pac_editar').val(info.telefono);
+            $('#direccion_pac_editar').val(info.direccion);
+            $('#hijos_pac_editar').val(info.hijos);
+            $('#id_usuario_editar').val(id_usuario);          
+        
+        }, 
+    });
+
+}
+
+function baja_paciente(id_usuario){
+
+    var action = 'baja_paciente';
+    $.ajax({
+        url: 'ajax.php',
+        type: 'POST',
+        async: true,
+        data:{action:action, id_usuario:id_usuario},
+
+        success: function(response){
+
+            alert(response);
+             
+            listado_pacientes();
+        }, 
+    }); 
+
+    
+}
 
 function listado_pacientes(){
 
@@ -111,5 +196,29 @@ function listado_pacientes(){
         },
     });
 }
-// BLOQUE DE FUNCIONES 
+
+function limpiar_formulario_alta(){
+
+    $('#nombre_pac').attr('disabled',false);
+    $('#apellido_pac').attr('disabled',false);
+    $('#dni_pac').attr('disabled',false);
+    $('#fecha_nac_pac').attr('disabled',false);
+    $('#sexo_pac').attr('disabled',false);
+    $('#correo_pac').attr('disabled',false);
+    $('#telefono_pac').attr('disabled',false);
+    $('#direccion_pac').attr('disabled',false);
+    $('#hijos_pac').attr('disabled',false);
+
+    $('#nombre_pac').val('');
+    $('#apellido_pac').val('');
+    $('#dni_pac').val('');
+    $('#fecha_nac_pac').val('');
+    $('#sexo_pac').val('');
+    $('#correo_pac').val('');
+    $('#telefono_pac').val('');
+    $('#direccion_pac').val('');
+
+    $('#guardar_nuevo_pac').slideDown(); 
+
+}
 

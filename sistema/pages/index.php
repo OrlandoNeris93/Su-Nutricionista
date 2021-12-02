@@ -78,16 +78,7 @@
                             </li>
                             <li>
                                 <a href="planes_nutricionales"><i class="fa fa-book fa-fw"></i>Nuevo Plan</a>
-                            </li>
-                            <li>
-                                <a href="#"><i class="fa fa-table fa-fw"></i> Recetas</a>
-                            </li>
-                            <li>
-                                <a href="#"><i class="fa fa-cubes fa-fw"></i> Ingredientes</a>
-                            </li>
-                            <li>
-                                <a href="#"><i class="fa fa-edit fa-fw"></i> Informes</a>
-                            </li>
+                            </li>                            
                         </ul>
                     </div>
                 </div>
