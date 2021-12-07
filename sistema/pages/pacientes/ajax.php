@@ -34,7 +34,7 @@ if (!empty($_POST)){
         }
     
     
-                                            }
+    }
 
     if ($_POST['action'] == 'info_paciente') 
     {
@@ -111,7 +111,25 @@ if (!empty($_POST)){
         {
             // armado de las filas del detalle de la receta
             while ($datos = mysqli_fetch_assoc($query_listado_pacientes)) 
-            {                        
+            {   
+                // clasificacion de botones del plan
+                
+                $botones = "";
+                if(intval($datos['cant_planes']) > 0)
+                {
+
+                    $botones .= '<button type="button" class="btn btn-outline btn-success"  onclick="imprimir_analisis('.$datos['id_usuario'].');" > Imprimir Evaluacion</button>
+                                <a href="../pdf/planes/'.$datos['cant_calorias_plan'].'/sintetica_y_desarrollada.pdf" download="sintetica_y_desarrollada.pdf" class="btn btn-outline btn-success" > Sintetica y cal</a>
+                                <a href="../pdf/planes/'.$datos['cant_calorias_plan'].'/seleccion_preparacion.pdf" download="seleccion_'.$datos['cant_calorias_plan'].'pdf" class="btn btn-outline btn-success">Formas y Preparacion</a>
+                                <a  href="../pdf/Recetas.pdf" download="Recetario.pdf" class="btn btn-outline btn-success" >Recetario</a>';
+
+                    if(intval($datos['cant_consultas']) >= 2)
+                    {
+                        $botones .= '<button type="button" class="btn btn-outline btn-success" onclick="imp_p_control('.$datos['id_usuario'].');">Controles</button>';
+                    }
+    
+                }
+
                 $detalleTabla .= '<tr class="odd gradeX">                                    
                                      <td>'.$datos['apellido'].'</td>
                                      <td colspan="2">'.$datos['nombre'].'</td>
@@ -119,8 +137,9 @@ if (!empty($_POST)){
                                      <td class="center">      
                                      <button type="button" class="btn btn-warning " onclick="editar_paciente('.$datos['id_usuario'].');" data-toggle="modal" data-target="#modal_editar_paciente">
                                                     <i class="fa fa-edit fw "></i> Editar
-                                     </button>
-                                        <button type="button" class="btn btn-outline btn-danger"  onclick="baja_paciente('.$datos['id_usuario'].');" ><i class="fa fa-close"></i> Eliminar</button>
+                                     </button>'.$botones.'
+                                       
+                                    <button type="button" class="btn btn-outline btn-danger"  onclick="baja_paciente('.$datos['id_usuario'].');" ><i class="fa fa-close"></i> Eliminar</button>
                                     </td>
                                 </tr>';
                                 
@@ -152,19 +171,39 @@ if (!empty($_POST)){
             {
                 // armado de las filas del detalle de la receta
                 while ($datos = mysqli_fetch_assoc($query_buscar_paciente)) 
-                {                        
-                $detalleTabla .= '<tr class="odd gradeX">                                    
-                                     <td>'.$datos['apellido'].'</td>
-                                     <td colspan="2">'.$datos['nombre'].'</td>
-                                     <td>'.$datos['dni'].'</td>                                                                 
-                                     <td class="center">                                       
-                                        <button type="button" class="btn btn-warning " onclick="editar_paciente('.$datos['id_usuario'].');" data-toggle="modal" data-target="#modal_editar_paciente">
-                                            <i class="fa fa-edit fw "></i> Editar
-                                        </button>
-                                        <button type="button" class="btn btn-outline btn-danger" onclick="baja_paciente('.$datos['id_usuario'].');" ><i class="fa fa-close"></i> Eliminar</button>
-                                    </td>
-                                </tr>';
-                                
+                {   
+                    // clasificacion de botones del plan
+                    
+                    $botones = "";
+                    if(intval($datos['cant_planes']) > 0)
+                    {
+    
+                        $botones .= '<button type="button" class="btn btn-outline btn-success"  onclick="imprimir_analisis('.$datos['id_usuario'].');" > Imprimir Evaluacion</button>
+                                    <a href="../pdf/planes/'.$datos['cant_calorias_plan'].'/sintetica_y_desarrollada.pdf" download="sintetica_y_desarrollada.pdf" class="btn btn-outline btn-success" > Sintetica y cal</a>
+                                    <a href="../pdf/planes/'.$datos['cant_calorias_plan'].'/seleccion_preparacion.pdf" download="seleccion_'.$datos['cant_calorias_plan'].'pdf" class="btn btn-outline btn-success">Formas y Preparacion</a>
+                                    <a  href="../pdf/Recetas.pdf" download="Recetario.pdf" class="btn btn-outline btn-success" >Recetario</a>';
+    
+                        if(intval($datos['cant_consultas']) >= 2)
+                        {
+                            $botones .= '<button type="button" class="btn btn-outline btn-success" onclick="imp_p_control('.$datos['id_usuario'].');">Controles</button>';
+                        }
+        
+                    }
+    
+                    $detalleTabla .= '<tr class="odd gradeX">                                    
+                                         <td>'.$datos['apellido'].'</td>
+                                         <td colspan="2">'.$datos['nombre'].'</td>
+                                         <td>'.$datos['dni'].'</td>                                                                 
+                                         <td class="center">      
+                                         <button type="button" class="btn btn-warning " onclick="editar_paciente('.$datos['id_usuario'].');" data-toggle="modal" data-target="#modal_editar_paciente">
+                                                        <i class="fa fa-edit fw "></i> Editar
+                                         </button>'.$botones.'
+                                           
+                                        <button type="button" class="btn btn-outline btn-danger"  onclick="baja_paciente('.$datos['id_usuario'].');" ><i class="fa fa-close"></i> Eliminar</button>
+                                        </td>
+                                    </tr>';
+                                    
+                             
                 // fin while	
                 }                
                 echo json_encode($detalleTabla, JSON_UNESCAPED_UNICODE);

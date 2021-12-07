@@ -77,8 +77,8 @@
                                 <a href="pacientes/"><i class="fa fa-users fa-fw"></i> Pacientes</a>
                             </li>
                             <li>
-                                <a href="planes_nutricionales"><i class="fa fa-book fa-fw"></i>Nuevo Plan</a>
-                            </li>                            
+                                <a href="planes_nutricionales/"><i class="fa fa-book fa-fw"></i>Nuevo Plan</a>
+                            </li>                          
                         </ul>
                     </div>
                 </div>
@@ -109,7 +109,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <a href="add_consulta.php">
+                                <a href="consultas/">
                                     <div class="panel-footer">                                       
                                         <span class="pull-right"><i class="fa fa-plus-circle fa-3x"></i></span>
 
@@ -130,7 +130,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <a href="add_paciente.php">
+                                <a href="pacientes/">
                                     <div class="panel-footer">
                                         <span class="pull-right"><i class="fa fa-plus-circle fa-3x"></i></span>
                                         <div class="clearfix"></div>
@@ -154,26 +154,6 @@
                                     <div class="panel-footer">
                                         <span class="pull-right"><i class="fa fa-plus-circle fa-3x"></i></span>
 
-                                        <div class="clearfix"></div>
-                                    </div>
-                                </a>
-                            </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6">
-                            <div class="panel panel-red">
-                                <div class="panel-heading">
-                                    <div class="row">
-                                        <div class="col-xs-3">
-                                            <i class="fa fa-edit fa-5x"></i>
-                                        </div>
-                                        <div class="col-xs-9 text-right h2">
-                                            <div>Nuevo Informe</div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <a href="#">
-                                    <div class="panel-footer">
-                                        <span class="pull-right"><i class="fa fa-plus-circle fa-3x"></i></span>
                                         <div class="clearfix"></div>
                                     </div>
                                 </a>

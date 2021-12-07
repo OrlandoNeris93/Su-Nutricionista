@@ -160,7 +160,7 @@
                                                     <input type="number" id="hijos_pac" name="hijos_pac" class="form-control" required>
                                                 </div>                                        
                                                 <div class="form-group col-lg-4">    
-                                                    <button type="submit" id="guardar_nuevo_pac" class="btn btn-primary btn-lg btn-outline"><i class="fa fa-save"></i> Guardar</button>
+                                                    <button type="submit" style="display:none;" id="guardar_nuevo_pac" class="btn btn-primary btn-lg btn-outline"><i class="fa fa-save"></i> Guardar</button>
                                                 </div>                                         
                                             </form>
                                         </div>
@@ -367,6 +367,9 @@
                                                         <select name="total_cal_plan" id="total_cal_plan" class="form-control" required>
                                                             <option value="">Seleccione </option>
                                                             <option value="1800">1800 Kcal</option>
+                                                            <option value="1900">1900 Kcal</option>
+                                                            <option value="2000">2000 Kcal</option>
+                                                            <option value="2100">2100 Kcal</option>
                                                             <option value="2200">2200 Kcal</option>                                                            
                                                         </select>
                                                     </div>                                                     

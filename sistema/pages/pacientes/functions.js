@@ -85,8 +85,6 @@ $(document).ready(function(){
 
     });
 
-    
-
     $('#form_editar_paciente').submit(function(e) {
         /* Act on the event */
         e.preventDefault(); 
@@ -121,6 +119,33 @@ $(document).ready(function(){
 });// FIN FUNCION READY //////////////////////////////////////////////////////////// 
 
 // BLOQUE DE FUNCIONES 
+
+function imp_p_control(id_usuario){
+    var ancho = 1000;
+    var alto = 800;
+
+    var x = parseInt((window.screen.width/2) - (ancho / 2));
+    var y = parseInt((window.screen.height/2) - (alto / 2));
+
+    $url = '../pdf/planilla_control.php?id_usuario='+id_usuario;
+    window.open($url,"Evaluacion","left="+x+",top="+y+",height="+alto+",width="+ancho+",scrollbar=si,location=no,resizable=si,menubar=no");
+    
+}
+
+
+function imprimir_analisis(id_usuario){
+
+    var ancho = 1000;
+    var alto = 800;
+
+    var x = parseInt((window.screen.width/2) - (ancho / 2));
+    var y = parseInt((window.screen.height/2) - (alto / 2));
+
+    $url = '../pdf/evaluacion.php?id_usuario='+id_usuario;
+    window.open($url,"Evaluacion","left="+x+",top="+y+",height="+alto+",width="+ancho+",scrollbar=si,location=no,resizable=si,menubar=no");
+    
+}
+
 function editar_paciente(id_usuario){
       
     action = 'info_paciente';
@@ -183,7 +208,8 @@ function listado_pacientes(){
         data: { action: action},    
         
         success: function (response) {
-
+            
+            //console.log(response);
             if (response != '') {
                 
                 var info = JSON.parse(response);
