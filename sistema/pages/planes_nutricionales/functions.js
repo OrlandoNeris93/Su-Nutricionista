@@ -258,7 +258,9 @@ function clasificacion_grasa_v(){
     var clasif_g_visceral;
 
     if(grasa_visceral != 0 && grasa_visceral != '')
-    {
+    {   
+        grasa_visceral = parseInt(grasa_visceral);
+        
         if(grasa_visceral <= 9)
         {
             clasif_g_visceral = "Bajo";

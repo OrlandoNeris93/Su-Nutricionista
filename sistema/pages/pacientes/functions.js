@@ -133,6 +133,46 @@ function imp_p_control(id_usuario){
 }
 
 
+
+function imprimir_recetario(){
+
+    var ancho = 1000;
+    var alto = 800;
+
+    var x = parseInt((window.screen.width/2) - (ancho / 2));
+    var y = parseInt((window.screen.height/2) - (alto / 2));
+
+    $url = '../pdf/recetas.pdf';
+    window.open($url,"Formas y Preparacion","left="+x+",top="+y+",height="+alto+",width="+ancho+",scrollbar=si,location=no,resizable=si,menubar=no");
+    
+}
+
+function imprimir_seleccion_preparacion(calorias){
+
+    var ancho = 1000;
+    var alto = 800;
+
+    var x = parseInt((window.screen.width/2) - (ancho / 2));
+    var y = parseInt((window.screen.height/2) - (alto / 2));
+
+    $url = '../pdf/planes/'+calorias+'/seleccion_preparacion.pdf';
+    window.open($url,"Formas y Preparacion","left="+x+",top="+y+",height="+alto+",width="+ancho+",scrollbar=si,location=no,resizable=si,menubar=no");
+    
+}
+
+function imprimir_sintetica_desarrollada(calorias){
+
+    var ancho = 1000;
+    var alto = 800;
+
+    var x = parseInt((window.screen.width/2) - (ancho / 2));
+    var y = parseInt((window.screen.height/2) - (alto / 2));
+
+    $url = '../pdf/planes/'+calorias+'/sintetica_y_desarrollada.pdf';
+    window.open($url,"Sintetica y desarrollada","left="+x+",top="+y+",height="+alto+",width="+ancho+",scrollbar=si,location=no,resizable=si,menubar=no");
+    
+}
+
 function imprimir_analisis(id_usuario){
 
     var ancho = 1000;

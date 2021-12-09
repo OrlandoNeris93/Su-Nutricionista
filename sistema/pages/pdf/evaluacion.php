@@ -124,7 +124,7 @@
 
 
 <body class="body contenedor_principal">
-<script>DameLaFechaHora();</script>
+
 <script>
     DameLaFechaHora();
   </script>

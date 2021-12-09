@@ -119,9 +119,9 @@ if (!empty($_POST)){
                 {
 
                     $botones .= '<button type="button" class="btn btn-outline btn-success"  onclick="imprimir_analisis('.$datos['id_usuario'].');" > Imprimir Evaluacion</button>
-                                <a href="../pdf/planes/'.$datos['cant_calorias_plan'].'/sintetica_y_desarrollada.pdf" download="sintetica_y_desarrollada.pdf" class="btn btn-outline btn-success" > Sintetica y cal</a>
-                                <a href="../pdf/planes/'.$datos['cant_calorias_plan'].'/seleccion_preparacion.pdf" download="seleccion_'.$datos['cant_calorias_plan'].'pdf" class="btn btn-outline btn-success">Formas y Preparacion</a>
-                                <a  href="../pdf/Recetas.pdf" download="Recetario.pdf" class="btn btn-outline btn-success" >Recetario</a>';
+                                 <button type="button" class="btn btn-outline btn-success"  onclick="imprimir_sintetica_desarrollada('.$datos['cant_calorias_plan'].');" > Sintetica y Cal</button>
+                                 <button type="button" class="btn btn-outline btn-success"  onclick="imprimir_seleccion_preparacion('.$datos['cant_calorias_plan'].');" > Formas y Preparacion</button>
+                                 <button type="button" class="btn btn-outline btn-success"  onclick="imprimir_recetario();" > Recetario </button>';
 
                     if(intval($datos['cant_consultas']) >= 2)
                     {
@@ -179,9 +179,9 @@ if (!empty($_POST)){
                     {
     
                         $botones .= '<button type="button" class="btn btn-outline btn-success"  onclick="imprimir_analisis('.$datos['id_usuario'].');" > Imprimir Evaluacion</button>
-                                    <a href="../pdf/planes/'.$datos['cant_calorias_plan'].'/sintetica_y_desarrollada.pdf" download="sintetica_y_desarrollada.pdf" class="btn btn-outline btn-success" > Sintetica y cal</a>
-                                    <a href="../pdf/planes/'.$datos['cant_calorias_plan'].'/seleccion_preparacion.pdf" download="seleccion_'.$datos['cant_calorias_plan'].'pdf" class="btn btn-outline btn-success">Formas y Preparacion</a>
-                                    <a  href="../pdf/Recetas.pdf" download="Recetario.pdf" class="btn btn-outline btn-success" >Recetario</a>';
+                                     <button type="button" class="btn btn-outline btn-success"  onclick="imprimir_sintetica_desarrollada('.$datos['cant_calorias_plan'].');" > Sintetica y Cal</button>
+                                     <button type="button" class="btn btn-outline btn-success"  onclick="imprimir_seleccion_preparacion('.$datos['cant_calorias_plan'].');" > Formas y Preparacion</button>
+                                     <button type="button" class="btn btn-outline btn-success"  onclick="imprimir_recetario();" > Recetario </button>';
     
                         if(intval($datos['cant_consultas']) >= 2)
                         {
