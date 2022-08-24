@@ -6,9 +6,8 @@ if (!empty($_POST)){
 
     if ($_POST['action'] == 'guardar_req_energeticos') 
     {       
-       
-
-        $id_profesional = $_POST['id_profesional'];               
+        $id_plan = $_POST['id_plan']; 
+        $id_consulta = $_POST['id_consulta'];               
         $peso_actual_RE = $_POST['peso_actual_RE'];
         $peso_ideal = $_POST['peso_ideal'];
         $rango_peso_ideal = $_POST['rango_peso_ideal'];
@@ -27,19 +26,13 @@ if (!empty($_POST)){
             $indice_peso ="Peso Actual";
         }
 
-        $id_user_paciente = $_POST['id_paciente_red'];
-        $query_id_paciente = mysqli_query($conn,"SELECT p.id_paciente as id FROM pacientes p WHERE p.id_usuario = $id_user_paciente");
-        $resultado_id = mysqli_fetch_assoc($query_id_paciente);
-        $id_paciente_red =  $resultado_id['id'];
-        
+               
         //echo $id_profesional.' '.$id_paciente_red.' '. $peso_actual_RE.' '. $peso_ideal.' '.$rango_peso_ideal.' '.$peso_ideal_corregido.' '. $lista_indices.' '. $factor_actividad.' '. $gasto_e_total.' '. $total_cal_plan;
         
-       
+        $query_insert = mysqli_query($conn,"UPDATE planes_nutricionales SET indice_peso_plan = '$indice_peso', 
+                                            gasto_e_basal = $gasto_energetico_basal, gasto_e_total = $gasto_e_total, calorias_plan = $total_cal_plan,
+                                            factor_actividad = '$factor_actividad' WHERE id_plan = $id_plan;");
 
-        $query_insert = mysqli_query($conn,"CALL guardar_plan($peso_ideal,'$rango_peso_ideal',$peso_ideal_corregido,'$indice_peso',
-                                                              $gasto_energetico_basal,$factor_actividad,$gasto_e_total,
-                                                              $total_cal_plan,$id_profesional,$id_paciente_red);");
-        
         if($query_insert){
             echo "Plan Generado Exitosamente! Vaya a la Seccion de Pacientes para Imprimirlo! ";
         }else{
@@ -86,7 +79,8 @@ if (!empty($_POST)){
                                                               $masa_musc_pac,$talla_pac,$id_paciente);");
         
         if($query_insert){
-            echo "Consulta Guardada con Exito! ";
+            $datos = mysqli_fetch_assoc($query_insert);
+            echo json_encode($datos,JSON_UNESCAPED_UNICODE);
         }else{
             echo "Error al Guardar los Datos!";            
         }
@@ -113,19 +107,20 @@ if (!empty($_POST)){
 
         //$prueba = $nombre_pac.'  '.$apellido_pac.'  '.$dni_pac.'  '.$fecha_nac_pac.'  '.$sexo_pac.'  '.$correo_pac.'  '.$telefono_pac.'  '.$direccion_pac;
         
-        $query_insert = mysqli_query($conn,"CALL add_nuevo_paciente('$nombre_pac', '$apellido_pac', '$dni_pac ',' $fecha_nac_pac', '$sexo_pac', '$correo_pac', '$telefono_pac', '$direccion_pac','$hijos_pac');");
-        $resultado = mysqli_fetch_assoc($query_insert);
+        $query_insert = mysqli_query($conn,"INSERT INTO usuarios(nombre,apellido,dni,fecha_nac,sexo,correo,telefono,direccion,hijos,tipo_usuario)
+                                                VALUES('$nombre_pac', '$apellido_pac', '$dni_pac ',' $fecha_nac_pac', '$sexo_pac', '$correo_pac', '$telefono_pac', '$direccion_pac','$hijos_pac',2);");
+        
         if($query_insert){
-            echo json_encode($resultado, JSON_UNESCAPED_UNICODE);
+            echo 'exito';
         }else{
-            echo "Error al Guardar los Datos!";            
+            echo "Error";            
         }
         mysqli_close($conn); 
     }
 
     if ($_POST['action'] == 'lista_pacientes') 
     {            
-        $query_listado_pacientes = mysqli_query($conn,"CALL lista_pacientes();");
+        $query_listado_pacientes = mysqli_query($conn,"SELECT * FROM usuarios WHERE tipo_usuario = 2 AND estado = 1");
         $resultado_lista = mysqli_num_rows($query_listado_pacientes);  
     
         $detalleTabla = '';
@@ -163,7 +158,8 @@ if (!empty($_POST)){
         
         if(strlen($texto) >= 3)
         {
-            $query_buscar_paciente = mysqli_query($conn,"CALL buscar_paciente('$texto');");
+            $query_buscar_paciente = mysqli_query($conn,"SELECT * FROM usuarios WHERE tipo_usuario = 2 AND estado = 1 
+                                            AND (apellido LIKE '%$texto%' OR nombre LIKE '%$texto%' OR dni LIKE '%$texto%'); ");
             $resultado_lista = mysqli_num_rows($query_buscar_paciente);  
     
             $detalleTabla = '';
@@ -197,7 +193,7 @@ if (!empty($_POST)){
     {
         
         $id_paciente = $_POST['id_paciente'];
-        $query_info_paciente = mysqli_query($conn,"CALL info_paciente($id_paciente);");
+        $query_info_paciente = mysqli_query($conn,"SELECT * FROM usuarios WHERE id_usuario = $id_paciente");
         
         if($query_info_paciente)
         {

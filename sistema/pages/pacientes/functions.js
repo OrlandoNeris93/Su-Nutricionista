@@ -49,10 +49,10 @@ $(document).ready(function(){
             data: $('#form_add_paciente').serialize(),
 
             success: function(response){
-
-                if (response != 'error') 
+                
+                if (response != 'Error') 
                 {   
-                    var info = JSON.parse(response);
+                    
                     //console.log(info);
                     //bloqueo de campos
                     $('#nombre_pac').attr('disabled','disabled');
@@ -65,7 +65,7 @@ $(document).ready(function(){
                     $('#direccion_pac').attr('disabled','disabled');
                     $('#hijos_pac').attr('disabled','disabled');
 
-                    $('#id_usuario').val(info.id_user);
+                    //$('#id_usuario').val(info.id_user);
                     
                     // OCULTAR BOTON GUARDAR     
                     $('#guardar_nuevo_pac').slideUp(); 
@@ -199,7 +199,7 @@ function editar_paciente(id_usuario){
         success: function (response) {
 
             var info = JSON.parse(response);
-            //console.log(info);
+            console.log(info);
 
             // mostrar datos en el formulario
             $('#nombre_pac_editar').val(info.nombre);

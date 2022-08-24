@@ -11,7 +11,7 @@
         
     }else{ // si exite variable de session, hara lo siguente 
          
-        $id_profesional = $_SESSION['id_profesional'];
+        $id_profesional =  $_SESSION['id_usuario'];
     }    
     
 ?>  
@@ -292,9 +292,10 @@
                                 <div class="panel-heading h2 bold">Necesidades Energeticas</div>                                
                                 <div class="panel-body">
                                     <div class="row">
-                                        <form id="form_requerimientos_energeticos"  role="form"> 
-                                            <input type="hidden" name="id_profesional" value="<?php echo  $id_profesional; ?>">
+                                        <form id="form_requerimientos_energeticos"  role="form">                                             
                                             <input type="hidden" name="id_paciente_red" id="id_paciente_red" >
+                                            <input type="hidden" name="id_plan" id="id_plan" >
+                                            <input type="hidden" name="id_consulta" id="id_consulta">
                                             <input type="hidden" name="action" value="guardar_req_energeticos" >                                       
                                             <div class="panel-body">
                                                 <span class="h2" style = "text-decoration; underline;">Indices de Peso</span><br>

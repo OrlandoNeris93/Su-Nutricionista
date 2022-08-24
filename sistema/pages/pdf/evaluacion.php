@@ -9,7 +9,10 @@
         $id_usuario = $_REQUEST['id_usuario'];
      
 
-        $query_info_consulta = mysqli_query($conn,"CALL info_eva_pfd($id_usuario);");
+        $query_info_consulta = mysqli_query($conn,"SELECT * FROM planes_nutricionales pn
+                                                    INNER JOIN consultas c ON pn.id_plan = c.id_plan 
+                                                    LEFT JOIN usuarios u ON pn.id_usuario = u.id_usuario
+                                                    WHERE pn.id_usuario = $id_usuario;");
         $result = mysqli_fetch_assoc($query_info_consulta);
        
         
@@ -25,28 +28,24 @@
         }
 
         $peso_actual = $result['peso_actual'];
-        $talla = $result['talla'];
+        $talla = $result['talla_actual'];
         $edad_actual = $result['edad_actual'];
-        $circ_cintura = $result['circ_cintura'];
+        $circ_cintura = $result['circ_cintura_actual'];
         $c_cintura_clasif = $result['c_cintura_clasif'];
-        $circ_cadera = $result['circ_cadera'];
-        $imc = $result['imc'];
-        $imc_clasificacion = $result['imc_clasificacion'];
+        $circ_cadera = $result['c_cadera'];
+        $imc = $result['imc_actual'];
+        $imc_clasificacion = $result['imc_clasif'];
         $diagnostico = $result['diagnostico'];
             
         $masa_grasa = $result['masa_grasa'];
-        $masa_grasa_clasif = $result['masa_grasa_clasif'];
+        $masa_grasa_clasif = $result['m_grasa_clasif'];
         $masa_muscular = $result['masa_muscular'];
-        $masa_musc_clasif = $result['masa_musc_clasif'];
+        $masa_musc_clasif = $result['m_muscular_clasif'];
         $grasa_visceral = $result['grasa_visceral'];
         $g_visceral_clasif = $result['g_visceral_clasif'];
-
-       	$rango_p_ideal = $result['rango_p_ideal']; 
-        $pi_corregido = $result['pi_corregido'];	
-        $diagnostico = $result['diagnostico'];
         
-       
-           
+        $primer_objetivo = 1 - $talla;
+          
 
     }else{
         echo "Error al Imprimir";
@@ -164,11 +163,9 @@
         <div class="linea contenedor_informacion fuente">
             <span class="bold">> % Grasa Visceral: </span><span><?php echo $grasa_visceral;?></span><span>  <?php echo $g_visceral_clasif;?>.</span>
         </div>
+       
         <div class="linea contenedor_informacion fuente">
-            <span class="bold">> Peso Saludable: Entre </span><span> <?php echo $rango_p_ideal;?> </span><span>Kg.</span>
-        </div>
-        <div class="linea contenedor_informacion fuente">
-            <span class="bold">> Primer Objetivo: </span><span><?php echo $pi_corregido;?> </span><span>Kg.</span>
+            <span class="bold">> Primer Objetivo: </span><span><?php echo $primer_objetivo;?> </span><span>Kg.</span>
         </div>
         <br><br>
         <div class="diagnostico contenedor_informacion fuente">

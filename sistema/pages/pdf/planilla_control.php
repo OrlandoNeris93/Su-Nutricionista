@@ -8,33 +8,32 @@
 
         $id_usuario = $_REQUEST['id_usuario'];
         
-        $query_consulta_controles = mysqli_query($conn,"CALL consulta_controles($id_usuario);");
+        $query_consulta_controles = mysqli_query($conn,"SELECT * FROM planes_nutricionales pn
+                                                        INNER JOIN consultas c ON pn.id_plan = c.id_plan 
+                                                        LEFT JOIN usuarios u ON pn.id_usuario = u.id_usuario
+                                                        WHERE pn.id_usuario = $id_usuario;");
         $result = mysqli_num_rows($query_consulta_controles);
         $tabla = "";
-        if($result >= 2)
-        {
+
             while ($datos = mysqli_fetch_assoc($query_consulta_controles)) 
             {
                 $nombre = $datos['nombre'];
                 $apellido = $datos['apellido'];
                 $edad_actual = $datos['edad_actual'];
-                $talla_cm = $datos['talla'];
+                $talla_cm = $datos['talla_actual'];
                 $talla_mt = $talla_cm/100; 
                 $tabla .= '<tr>                                    
                             <td>'.$datos['fecha'].'</td>
                             <td>'.$talla_mt.'</td>
-                            <td>'.$datos['peso'].'</td>                            
-                            <td>'.$datos['imc'].'</td>
-                            <td>'.$datos['circ_cintura'].'</td>
-                            <td>'.$datos['circ_cadera'].'</td>
+                            <td>'.$datos['peso_actual'].'</td>                            
+                            <td>'.$datos['imc_actual'].'</td>
+                            <td>'.$datos['circ_cintura_actual'].'</td>
+                            <td>'.$datos['c_cadera'].'</td>
                             <td>'.$datos['masa_muscular'].'</td>
                             <td>'.$datos['masa_grasa'].'</td>
                             <td>'.$datos['grasa_visceral'].'</td>                                                                 
                         </tr>';
             } 
-        }else{
-            echo "sin datos para mostrar";
-        }
 
     }else{
         echo "Error al Imprimir";

@@ -26,10 +26,12 @@ $(document).ready(function(){
                     
                         $('#listado_pacientes_lista').html('');
                         $('#listado_pacientes_lista').html(info);       
-                    }         
+                    }       
                 }, 
             }); 
-        }
+        }else{
+            listado_pacientes();
+        }  
         
         
        /*
@@ -50,12 +52,11 @@ $(document).ready(function(){
 
             success: function(response){
 
-                console.log(response);
-
+                //console.log(response);
                 
                 if (response != 'error') 
                 {   
-                    var info = JSON.parse(response);
+                    //var info = JSON.parse(response);
                     //console.log(info);
                     //bloqueo de campos
                     $('#nombre_pac').attr('disabled','disabled');
@@ -68,7 +69,7 @@ $(document).ready(function(){
                     $('#direccion_pac').attr('disabled','disabled');
                     $('#hijos_pac').attr('disabled','disabled');
 
-                    $('#id_paciente_antropometria').val(info.id_user);
+                   // $('#id_paciente_antropometria').val(info.id_user);
                     
                     // OCULTAR BOTON GUARDAR     
                     $('#guardar_nuevo_pac').slideUp(); 
@@ -101,7 +102,7 @@ $(document).ready(function(){
         // re-disabled the set of inputs that you previously enabled
         disabled.attr('disabled','disabled');
 
-        console.log(formulario_serializado);    
+       // console.log(formulario_serializado);    
         
         
         $.ajax({
@@ -111,8 +112,14 @@ $(document).ready(function(){
             data: formulario_serializado,
 
             success: function(response){
-                                
-                alert(response);
+
+                var info = JSON.parse(response);
+                console.log(info);
+                $('#id_consulta').val(info.id_consulta);
+                $('#id_plan').val(info.id_plan);     
+                
+                alert('Antropometria Guardada Exitosamente!');
+
                 $('#form_antropometria *').prop('readonly', true); 
                 $('#guardar_antropometria').slideUp();
                 calcular_indices_de_peso();            
@@ -637,10 +644,10 @@ function añadir_paciente_plan(id_paciente){
             $('#telefono_pac').val(info.telefono);
             $('#direccion_pac').val(info.direccion);
             $('#hijos_pac').val(info.hijos);
-            $('#id_usuario').val(id_paciente);
-            $('#id_paciente_red').val(id_paciente);            
+            $('#id_usuario').val(id_usuario);
+            $('#id_paciente_red').val(id_usuario);            
             $('#edad_actual').val(info.edad); 
-            $('#id_paciente_antropometria').val(info.id_paciente);
+            $('#id_paciente_antropometria').val(info.id_usuario);
             
             // OCULTAR BOTON GUARDAR     
             $('#guardar_nuevo_pac').slideUp(); 
@@ -656,7 +663,8 @@ function añadir_paciente_plan(id_paciente){
             $('#direccion_pac').attr('disabled','disabled');
             $('#hijos_pac').attr('disabled','disabled');           
             cerrar_modal_buscar_paciente();
-            
+            $('#edad_actual').val(calcular_edad_actual($('#fecha_nac_pac').val()));
+            //calcular_edad_actual(info.fecha_nac);
             
         }, 
     });

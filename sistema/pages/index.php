@@ -1,13 +1,14 @@
 
 <?php
     session_start();
+    /*
 
     if(empty( $_SESSION['estado']))
     {
         session_destroy();
         header('location: ../../');
         
-    }
+    } */
 ?>
 
 <!DOCTYPE html>

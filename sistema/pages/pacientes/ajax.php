@@ -2,6 +2,9 @@
 
 require_once('../../../conexion.php');
 
+//$_POST['action'] = 'info_paciente';
+//$_POST['id_usuario'] = 4;
+$_POST['action'] = 'lista_pacientes';
 if (!empty($_POST)){
 
     if ($_POST['action'] == 'actualizar_datos_pac')
@@ -21,10 +24,11 @@ if (!empty($_POST)){
         $timestamp = strtotime($fecha_nac_pac_original); 
         $fecha_nac_pac_editar = date("Y-m-d", $timestamp );
 
-        $query_actualizar_datos = mysqli_query($conn,"CALL actualizar_paciente('$nombre_pac_editar',
-                                                '$apellido_pac_editar','$dni_pac_editar','$fecha_nac_pac_editar',
-                                                '$sexo_pac_editar','$correo_pac_editar','$telefono_pac_editar',
-                                                '$direccion_pac_editar',$hijos_pac_editar,$id_usuario_editar);");
+        $query_actualizar_datos = mysqli_query($conn,"UPDATE usuarios SET nombre = '$nombre_pac_editar', apellido = ' $apellido_pac_editar', 
+                                                        dni = '$dni_pac_editar', fecha_nac = ' $fecha_nac_pac_editar', sexo = '$sexo_pac_editar', 
+                                                        correo = '$correo_pac_editar', telefono = '$telefono_pac_editar ',
+                                                        direccion = '$direccion_pac_editar', hijos = $hijos_pac_editar 
+                                                      WHERE id_usuario = $id_usuario_editar AND estado = 1 AND tipo_usuario = 2");
     
         if($query_actualizar_datos)
         {
@@ -42,7 +46,7 @@ if (!empty($_POST)){
         $id_usuario = $_POST['id_usuario'];
 
         
-        $query_info_paciente = mysqli_query($conn,"CALL info_paciente($id_usuario);");
+        $query_info_paciente = mysqli_query($conn,"SELECT * FROM usuarios WHERE id_usuario = $id_usuario;");
         
         if($query_info_paciente)
         {
@@ -60,7 +64,7 @@ if (!empty($_POST)){
     {
        $id_usuario_baja = $_POST['id_usuario'];
 
-       $query_baja = mysqli_query($conn,"CALL baja_paciente($id_usuario_baja);");
+       $query_baja = mysqli_query($conn,"UPDATE usuarios SET estado = 0  WHERE id_usuario = $id_usuario_baja");
 
        if($query_baja){
            echo "Paciente dado de Baja Correctamente";
@@ -89,20 +93,24 @@ if (!empty($_POST)){
         $fecha_nac_pac = date("Y-m-d", $timestamp );
 
         //$prueba = $nombre_pac.'  '.$apellido_pac.'  '.$dni_pac.'  '.$fecha_nac_pac.'  '.$sexo_pac.'  '.$correo_pac.'  '.$telefono_pac.'  '.$direccion_pac;
-        
-        $query_insert = mysqli_query($conn,"CALL add_nuevo_paciente('$nombre_pac', '$apellido_pac', '$dni_pac ',' $fecha_nac_pac', '$sexo_pac', '$correo_pac', '$telefono_pac', '$direccion_pac','$hijos_pac');");
-        $resultado = mysqli_fetch_assoc($query_insert);
+
+        $query_insert = mysqli_query($conn,"INSERT INTO usuarios(nombre,apellido,direccion,telefono,dni,correo,fecha_nac,sexo,hijos,tipo_usuario) 
+                                            VALUES('$nombre_pac','$apellido_pac','$direccion_pac', '$telefono_pac', '$dni_pac', '$correo_pac','$fecha_nac_pac','$sexo_pac','$hijos_pac',2);"); // tipo usuario es 2 cuando es paciente
+        // $resultado = mysqli_fetch_assoc($query_insert);
         if($query_insert){
-            echo json_encode($resultado, JSON_UNESCAPED_UNICODE);
+            echo 'exito';
         }else{
-            echo "Error al Guardar los Datos!";            
+            echo "Error";            
         }
         mysqli_close($conn); 
     }
 
     if ($_POST['action'] == 'lista_pacientes') 
     {            
-        $query_listado_pacientes = mysqli_query($conn,"CALL lista_pacientes();");
+        $query_listado_pacientes = mysqli_query($conn,"SELECT u.id_usuario, u.nombre, u.apellido, u.dni, COUNT(p.id_usuario) as cant_planes
+                                                        FROM usuarios u LEFT JOIN planes_nutricionales p ON u.id_usuario = p.id_usuario
+                                                        WHERE u.tipo_usuario = 2 AND u.estado = 1
+                                                        GROUP BY u.nombre,u.apellido,u.dni ");
         $resultado_lista = mysqli_num_rows($query_listado_pacientes);  
     
         $detalleTabla = '';
@@ -119,16 +127,15 @@ if (!empty($_POST)){
                 {
 
                     $botones .= '<button type="button" class="btn btn-outline btn-success"  onclick="imprimir_analisis('.$datos['id_usuario'].');" > Imprimir Evaluacion</button>
-                                 <button type="button" class="btn btn-outline btn-success"  onclick="imprimir_sintetica_desarrollada('.$datos['cant_calorias_plan'].');" > Sintetica y Cal</button>
-                                 <button type="button" class="btn btn-outline btn-success"  onclick="imprimir_seleccion_preparacion('.$datos['cant_calorias_plan'].');" > Formas y Preparacion</button>
+                                 <button type="button" class="btn btn-outline btn-success"  onclick="imprimir_sintetica_desarrollada('.');" > Sintetica y Cal</button>
+                                 <button type="button" class="btn btn-outline btn-success"  onclick="imprimir_seleccion_preparacion('.');" > Formas y Preparacion</button>
                                  <button type="button" class="btn btn-outline btn-success"  onclick="imprimir_recetario();" > Recetario </button>';
 
-                    if(intval($datos['cant_consultas']) >= 2)
-                    {
-                        $botones .= '<button type="button" class="btn btn-outline btn-success" onclick="imp_p_control('.$datos['id_usuario'].');">Controles</button>';
-                    }
+                   
+                    $botones .= '<button type="button" class="btn btn-outline btn-success" onclick="imp_p_control('.$datos['id_usuario'].');">Controles</button>';
+                   
     
-                }
+                } 
 
                 $detalleTabla .= '<tr class="odd gradeX">                                    
                                      <td>'.$datos['apellido'].'</td>

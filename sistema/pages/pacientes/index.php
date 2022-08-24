@@ -3,15 +3,12 @@
     // inclucion de archivo de conexion e inicio de session
     require_once('../../../conexion.php');
     session_start();
-
+/*
     if(empty($_SESSION['estado'])) // si no exite variable de session, destruye la session creada y redirecciona al login. 
     {
         session_destroy();
-        header('location: ../../../');
-        
-    }else{ // si exite variable de session, hara lo siguente 
-         
-         }    
+        header('location: ../../../');        
+    } */
     
 ?>  
 

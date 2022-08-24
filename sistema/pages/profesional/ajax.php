@@ -12,7 +12,7 @@ if (!empty($_POST)){
         $usuario_cuenta = $_POST['usuario_cuenta'];
         $clave_cuenta = $_POST['clave_cuenta'];
         
-        $query_update = mysqli_query($conn,"CALL actualizar_datos_cuenta_prof($id_usuario, '$usuario_cuenta', '$clave_cuenta');");
+        $query_update = mysqli_query($conn,"update usuarios set usuario = '$usuario_cuenta', clave = '$clave_cuenta' where id_usuario = $id_usuario;");
         
         if($query_update){
             echo "Datos Actualizados Exitosamente!";
@@ -35,7 +35,11 @@ if (!empty($_POST)){
             $matricula_prof = $_POST["matricula_prof"];
             $titulo_prof    = $_POST["titulo_prof"];
             
-            $query_update = mysqli_query($conn,"CALL actualizar_datos_pers_prof($id_usuario, '$nombre_prof', '$apellido_prof', '$dni_prof ', '$correo_prof', '$telefono_prof', '$direccion_prof', '$matricula_prof', '$titulo_prof');");
+            $query_update = mysqli_query($conn,"UPDATE usuarios u LEFT JOIN profesional p ON u.id_usuario = p.id_usuario
+                                                SET u.nombre = '$nombre_prof', u.apellido = '$apellido_prof ', u.direccion = '$direccion_prof', 
+                                                u.telefono = '$telefono_prof', u.dni = '$dni_prof', u.correo = '$correo_prof', 
+                                                p.matricula = '$matricula_prof', p.titulo_desc = '$titulo_prof'
+                                                WHERE u.id_usuario =  $id_usuario;");
             
             if($query_update){
                 echo "Datos Actualizados Exitosamente!";

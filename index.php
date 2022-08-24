@@ -25,7 +25,8 @@ if(!empty($_SESSION))
     {
       // echo "     ".$usuario_str."   ".$clave_str; exit;
 
-      $query_login = mysqli_query($conn,"CALL proc_login('$usuario_str','$clave_str');");
+      $query_login = mysqli_query($conn,"SELECT u.id_usuario FROM usuarios u
+                                         WHERE u.usuario = '$usuario_str' AND u.clave = '$clave_str' AND u.estado = 1");
       $result = mysqli_fetch_assoc($query_login);
       
       if(empty($result))
@@ -34,29 +35,22 @@ if(!empty($_SESSION))
         session_destroy();
 
       }else{        
-        if($result['id_tipo'] == 3)
-        {         
-           
+       
           $id_usuario = $result['id_usuario'];
-          $id_profesional = $result['id_profesional'];
+          //$id_profesional = $result['id_profesional'];
 
           // echo $id['id'];       
           $_SESSION['estado']=true;
           $_SESSION['id_usuario'] =  $id_usuario;
-          $_SESSION['id_profesional'] =  $id_profesional;
+          //$_SESSION['id_profesional'] =  $id_profesional;
           
-          header('location: sistema/');
-
-        }else{
-          
-          echo "esta seccion aun no se encuentra disponible" ; exit;
-
+          header('location: sistema/');       
         }
-      }      
+         
 
     }else{
       $alert = 'Usuario o Clave Erroneos.. ';
-    }
+    }  
 
     mysqli_close($conn);
   }

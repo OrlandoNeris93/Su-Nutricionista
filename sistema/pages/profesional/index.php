@@ -6,15 +6,17 @@
 
     if(empty($_SESSION['estado'])) // si no exite variable de session, destruye la session creada y redirecciona al login. 
     {
-        session_destroy();
-        header('location: ../../../');
+        //session_destroy();
+        //header('location: ../../../');
         
     }else{ // si exite variable de session, hara lo siguente 
          
         
         // con el id de usuario, se extraen los datos del profesional
         $id_usuario =  $_SESSION['id_usuario']; 
-        $query_info = mysqli_query($conn,"CALL consulta_info_profesional('$id_usuario');");
+        $query_info = mysqli_query($conn,"SELECT * FROM usuarios u
+                                            LEFT JOIN profesional p on u.id_usuario = p.id_usuario
+                                            WHERE u.id_usuario = $id_usuario ;");
         $resultado = mysqli_fetch_assoc($query_info);
 
         // luego se almanena la informacion en variables locales. para imprimir en los campos que corresponden
@@ -27,7 +29,7 @@
         $dni = $resultado['dni'];
         $correo = $resultado['correo'];
         $matricula = $resultado['matricula'];
-        $titulo = $resultado['titulo'];
+        $titulo = $resultado['titulo_desc'];
 
         //echo $usuario.'  '.$clave.'  '.$nombre.'  '.$apellido.'  '.$direccion.'  '.$telefono.'  '.$dni.'  '.$correo.'  '.$matricula.'  '.$titulo; exit;
     }    
